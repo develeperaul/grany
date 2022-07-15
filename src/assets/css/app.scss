@@ -7,3 +7,40 @@
 body {
   @apply tw-font-nexa tw-text-sm;
 }
+
+@layer components {
+  .wrapper {
+    padding-left: 16px;
+    padding-right: 16px;
+  }
+
+  @screen md {
+    .wrapper {
+      max-width: 768px;
+      padding-left: 34px;
+      padding-right: 34px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+  }
+
+  @screen lg {
+    .wrapper {
+      max-width: 1024px;
+    }
+  }
+
+  @screen xl {
+    .wrapper {
+      padding-left: 40px;
+      padding-right: 40px;
+      max-width: 1200px;
+    }
+  }
+
+  @screen 2xl {
+    .wrapper {
+      max-width: 1920px;
+    }
+  }
+}
