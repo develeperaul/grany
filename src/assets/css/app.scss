@@ -5,13 +5,20 @@
 
 
 body {
-  @apply tw-font-nexa tw-text-sm;
+  line-height: 1.4;
+  @apply tw-font-nexa tw-text-sm tw-text-white;
 }
 
 @layer components {
   .wrapper {
     padding-left: 16px;
     padding-right: 16px;
+  }
+
+  .layout-base {
+    display: grid;
+    grid-template-rows: auto 1fr auto;
+    grid-template-columns: 1fr;
   }
 
   @screen md {

@@ -12,13 +12,21 @@ module.exports = {
     },
     colors: {
       orange: '#FF6B00',
+      orangeHover: '#FF8413',
       white: '#FFFFFF',
       gray: '#D7D7D7',
       primary: '#081924',
       secondary: '#718A98',
-      dark: '#142D3E'
+      dark: '#142D3E',
+      negative: '#f00',
+    },
+    lineHeight: {
+      '140': '1.4',
+      '120': '1.2',
+      '100': '1',
     },
     spacing: {
+      '0': '0',
       '2': '2px',
       '4': '4px',
       '6': '6px',
@@ -26,6 +34,7 @@ module.exports = {
       '10': '10px',
       '12': '12px',
       '14': '14px',
+      '15': '15px',
       '16': '16px',
       '18': '18px',
       '20': '20px',
