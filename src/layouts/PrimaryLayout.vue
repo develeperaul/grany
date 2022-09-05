@@ -1,9 +1,7 @@
 <template>
   <div class="layout-base tw-bg-primary tw-min-h-screen">
     <Header />
-    <main>
-      <router-view />
-    </main>
+    <router-view />
     <Footer />
   </div>
   <InlineSvg class="tw-hidden" :src="require('@/assets/sprites/sprite-icons.svg')" />

@@ -69,7 +69,7 @@
             </svg>
             <div class="tw-underline tw-leading-100 tw-pt-4">на фасаде</div>
           </router-link>
-          <router-link class="tw-w-1/2 tw-flex tw-items-center tw-bg-orange tw-rounded-r-md tw-px-8 tw-py-15" to="/terms">
+          <router-link class="tw-w-1/2 tw-flex tw-items-center tw-bg-orange tw-rounded-r-md tw-px-8 tw-py-15" to="">
             <svg class="tw-w-[30px] tw-h-[30px] tw-mr-10 tw-fill-white">
               <use xlink:href="#params"></use>
             </svg>

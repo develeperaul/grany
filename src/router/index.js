@@ -9,18 +9,13 @@ const routes = [
   },
 
   {
-    path: '',
+    path: '/flats',
     component: () => import('@/layouts/PrimaryLayout.vue'),
     children: [
       {
-        path: '/gallery',
-        name: 'gallery',
-        component: () => import('@/pages/Gallery.vue')
-      },
-      {
-        path: '/terms',
-        name: 'terms',
-        component: () => import('@/pages/Terms.vue')
+        path: '',
+        name: 'flats.params',
+        component: () => import('@/pages/FlatsSelectionParams.vue'),
       }
     ]
   },

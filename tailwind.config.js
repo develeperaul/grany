@@ -1,6 +1,9 @@
 /** @type {import('tailwindcss').Config} */
 module.exports = {
   content: ["./src/**/*.{vue,js}"],
+  safelist: [
+    'tw-fill-secondary'
+  ],
   prefix: 'tw-',
   theme: {
     screens: {

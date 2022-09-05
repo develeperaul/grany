@@ -4,9 +4,12 @@
 @tailwind utilities;
 
 
-body {
-  line-height: 1.4;
-  @apply tw-font-nexa tw-text-sm tw-text-white;
+
+@layer base {
+  body {
+    line-height: 1.4;
+    @apply tw-font-nexa tw-text-sm tw-text-white;
+  }
 }
 
 @layer components {
@@ -15,10 +18,18 @@ body {
     padding-right: 16px;
   }
 
+  .h1 {
+    @apply tw-text-lg tw-font-extrabold tw-leading-100 tw-lowercase;
+  }
+
   .layout-base {
     display: grid;
     grid-template-rows: auto 1fr auto;
     grid-template-columns: 1fr;
+  }
+
+  .page-pt {
+    @apply tw-pt-30
   }
 
   @screen md {
@@ -28,6 +39,10 @@ body {
       padding-right: 34px;
       margin-left: auto;
       margin-right: auto;
+    }
+
+    .h1 {
+      @apply tw-text-xl tw-font-extrabold;
     }
   }
 
@@ -48,6 +63,10 @@ body {
   @screen 2xl {
     .wrapper {
       max-width: 1920px;
+    }
+
+    .h1 {
+      @apply tw-text-xl10;
     }
   }
 }
