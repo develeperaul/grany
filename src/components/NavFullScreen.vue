@@ -22,16 +22,16 @@
               class="tw-max-w-[400px] tw-flex tw-flex-wrap -tw-ml-30 -tw-mt-20"
             >
               <div class="tw-w-full md:tw-w-1/2 tw-pl-30 tw-pt-20">
-                <AppLink external to="#">Новости и акции</AppLink>
+                <AppLink external to="#news">Новости и акции</AppLink>
               </div>
               <div class="tw-w-full md:tw-w-1/2 tw-pl-30 tw-pt-20">
-                <AppLink external to="#">Ход строительства</AppLink>
+                <AppLink external to="#progress">Ход строительства</AppLink>
               </div>
               <div class="tw-w-full md:tw-w-1/2 tw-pl-30 tw-pt-20">
-                <AppLink external to="#">Документы</AppLink>
+                <AppLink external to="#documents">Документы</AppLink>
               </div>
               <div class="tw-w-full md:tw-w-1/2 tw-pl-30 tw-pt-20">
-                <AppLink external to="#">Застройщик</AppLink>
+                <AppLink external to="#developer">Застройщик</AppLink>
               </div>
             </div>
           </div>
@@ -50,27 +50,27 @@ export default {
       nav: [
         {
           label: 'о проекте',
-          to: { name: 'main' },
+          to: { name: 'about' },
         },
         {
           label: 'расположение',
-          to: { name: 'main' },
+          to: { name: 'location' },
         },
-        {
-          label: 'благоустройство',
-          to: { name: 'main' },
-        },
+        // {
+        //   label: 'благоустройство',
+        //   to: { name: 'main' },
+        // },
         {
           label: 'галерея',
-          to: { name: 'main' },
+          to: { name: 'gallery' },
         },
         {
           label: 'условия покупки',
-          to: { name: 'main' },
+          to: { name: 'purchase' },
         },
         {
           label: 'контакты',
-          to: { name: 'main' },
+          to: { name: 'contacts' },
         },
       ],
     };

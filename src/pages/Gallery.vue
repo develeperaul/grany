@@ -1,9 +1,9 @@
 <template>
-  <div>
-    <div class="wrapper">
-      <Carousel />
-    </div>
-  </div>
+  <app-page>
+    <!-- <div class="wrapper"> -->
+      <img class="tw-w-full" src="/gallery.svg" alt="">
+    <!-- </div> -->
+  </app-page>
 </template>
 
 <script>

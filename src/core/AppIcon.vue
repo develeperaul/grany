@@ -6,37 +6,43 @@ export default {
     name: {
       required: true,
       type: String
-   },
-   iconClass: {
-    default: '',
-    type: String
-   },
-   slim: {
-    default: false,
-    type: Boolean
-   },
-   size: {
-    default: '24px',
-    type: String
-   },
-   tag: {
-    default: 'span',
-    type: String
-   },
-   fill: {
-    default: 'black',
-    type: String
-   }
+    },
+    iconClass: {
+      default: '',
+      type: String
+    },
+    slim: {
+      default: false,
+      type: Boolean
+    },
+    size: {
+      default: '24px',
+      type: String
+    },
+    tag: {
+      default: 'span',
+      type: String
+    },
+    fill: {
+      default: undefined,
+      type: String
+    },
+    fillHex: {
+      default: undefined,
+      type: String
+    },
   },
   setup(props) {
 
     const classes = computed(() => {
-      return `app-icon tw-fill-${props.fill} ${props.iconClass}`
+      let color = !props.fillHex ? `tw-fill-${props.fill || 'black'}` : '';
+      return `app-icon ${props.iconClass} ${color}`;
     });
 
     const styles = computed(() => {
       return {
-        '--size': props.size
+        '--size': props.size,
+        'fill': props.fillHex
       }
     });
 

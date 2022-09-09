@@ -7,11 +7,11 @@
             <img class="tw-w-full" width="146" height="60" src="@/assets/images/logo.svg" alt="логотип грани">
           </router-link>
 
-          <router-link class="tw-hidden lg:tw-block tw-pt-4 tw-pr-4 tw-mr-24" to="/">О проекте</router-link>
+          <router-link class="tw-hidden lg:tw-block tw-pt-4 tw-pr-4 tw-mr-24" :to="{ name: 'about' }">О проекте</router-link>
 
           <div class="tw-hidden 2xl:tw-grow 2xl:tw-block"></div>
 
-          <router-link class="tw-hidden lg:tw-flex lg:tw-items-center lg:tw-mr-24" to="/">
+          <router-link class="tw-hidden lg:tw-flex lg:tw-items-center lg:tw-mr-24" :to="{ name: 'flats.params' }">
             <svg class="tw-w-[36px] tw-h-[36px] lg:tw-mr-14">
               <use xlink:href="#b-key"></use>
             </svg>
@@ -26,7 +26,7 @@
               <div class="tw-underline tw-leading-100 tw-pt-4">на фасаде</div>
             </router-link>
 
-            <router-link class="tw-flex tw-items-center tw-bg-orange tw-rounded-r-md lg:tw-px-8 xl:tw-px-14 tw-py-10" to="/">
+            <router-link class="tw-flex tw-items-center tw-bg-orange tw-rounded-r-md lg:tw-px-8 xl:tw-px-14 tw-py-10" :to="{ name: 'flats.params' }">
               <svg class="tw-w-[30px] tw-h-[30px] tw-mr-10 tw-fill-white">
                 <use xlink:href="#params"></use>
               </svg>
