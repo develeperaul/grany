@@ -1,5 +1,5 @@
 <template>
-  <div class="tw-pb-14 tw-relative">
+  <div class="tw-pb-20 tw-relative">
     <div class="tw-border-b tw-h-[50px] tw-relative tw-flex"
       :class="{
         'tw-border-orange': focused && !errorMessage,
@@ -7,13 +7,15 @@
         'tw-border-negative': errorMessage
       }"
     >
-      <div class="tw-flex-grow">
-        <input v-bind="listeners" id="inp" class="tw-block tw-w-full tw-h-full full input" type="text" v-model="value">
-        <label for="inp" class="label" :class="{ 'dirty': hasValue }">test</label>
+      <div class="tw-flex-grow tw-relative">
+        <input v-bind="listeners" :id="name" class="tw-block tw-w-full tw-h-full full input" type="text" v-model="value">
+        <label :for="name" class="label" :class="{ 'dirty': hasValue }">{{ label }}</label>
       </div>
-      <div class="tw-h-[50px] tw-leading-[50px]">hora</div>
+      <div v-if="$slots.append" class="tw-h-[50px] tw-shrink-0 tw-pl-8 tw-flex tw-items-center">
+        <slot name="append" />
+      </div>
     </div>
-    <p v-if="errorMessage" class="errorMessage">{{ errorMessage }}</p>
+    <p v-if="errorMessage" class="errorMessage" :title="errorMessage">{{ errorMessage }}</p>
   </div>
 </template>
 
@@ -28,8 +30,9 @@ export default {
   },
   setup(props) {
     const focused = ref(false);
-    const input = useField(props.name, inputValue => !!inputValue, {
-      initialValue: ''
+    const input = useField(props.name, props.rules, {
+      initialValue: '',
+      label: props.label
     });
 
     const hasValue = computed(() => input.value.value !== '');
@@ -59,20 +62,28 @@ export default {
 
   .input:focus + .label, .label.dirty {
     transform: translateY(0px);
+    top: 0;
+    bottom: auto;
     @apply tw-text-xs tw-text-secondary tw-leading-140;
   }
 
   .label {
     position: absolute;
-    top: 0px;
-    transform: translateY(15px);
     transition: transform 300ms, font-size 300ms;
+    line-height: 50px;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    top: 0;
+    bottom: 0px;
+    left: 0;
+    right: 0;
   }
 
   .errorMessage {
     position: absolute;
-    left: 0;
-    bottom: 0;
+    top: 100%;
+    transform: translateY(-18px);
     @apply tw-text-xs tw-text-negative tw-leading-100;
   }
 </style>

@@ -8,13 +8,13 @@ export default () => {
   configure({
     generateMessage: localize({
       ru: {
-            ...ru,
-            messages: {
-              ...ru.messages,
-              email: 'Поле {field} должно быть электронным адресом',
-              cellphone: 'Поле {field} заполнено неправильно'
-            }
-          },
+        code: 'ru',
+        messages: {
+          ...ru.messages,
+          email: 'Поле {field} должно быть электронным адресом',
+          cellphone: 'Поле {field} заполнено неправильно'
+        }
+      },
     }),
   });
 
