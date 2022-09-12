@@ -3,7 +3,7 @@
 @tailwind components;
 @tailwind utilities;
 
-
+@import './cover.scss';
 
 @layer base {
   body {
@@ -16,6 +16,12 @@
   .wrapper {
     padding-left: 16px;
     padding-right: 16px;
+  }
+
+  .dialog-full {
+    position: fixed;
+    z-index: 900;
+    @apply tw-inset-0 tw-bg-primary;
   }
 
   .h1 {

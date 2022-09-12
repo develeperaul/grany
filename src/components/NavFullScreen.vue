@@ -1,5 +1,5 @@
 <template>
-  <div class="nav tw-overflow-x-hidden" v-if="value">
+  <div class="dialog-full tw-overflow-x-hidden" v-if="value">
     <div class="tw-min-h-full tw-relative tw-z-0 layout-base tw-overflow-y-hidden">
       <Header />
       <div class="tw-pt-30 tw-pb-30 2xl:tw-pt-[100px]">
@@ -84,12 +84,6 @@ export default {
 </script>
 
 <style scoped lang="scss">
-.nav {
-  position: fixed;
-  z-index: 900;
-  @apply tw-inset-0 tw-bg-primary;
-}
-
 .links {
   max-width: 600px;
 }

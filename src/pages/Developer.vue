@@ -1,7 +1,7 @@
 <template>
   <app-page>
     <div class="wrapper">
-      <img src="/dev.svg" alt="">
+
     </div>
   </app-page>
 </template>

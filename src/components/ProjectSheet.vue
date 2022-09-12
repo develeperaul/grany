@@ -120,8 +120,8 @@
         >
       </div>
 
-      <div class="project-sheet__form lg:tw-ml-20 2xl:tw-ml-[80px] md:tw-mr-[100px] lg:tw-mr-0 md:tw-ml-[60px] md:tw-mb-[80px] lg:tw-mb-0">
-        <FormCallBack />
+      <div class="project-sheet__form md:tw-mr-[100px] md:tw-ml-[60px] md:tw-mb-[80px] lg:tw-ml-20 lg:tw-mr-[-35px] lg:tw-mb-0 2xl:tw-ml-80 2xl:tw-mr-[-45px]">
+        <FormCallBack class="cover" />
       </div>
     </section>
   </div>
