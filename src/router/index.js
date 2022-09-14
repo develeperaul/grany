@@ -126,6 +126,18 @@ const routes = [
         component: () => import('@/pages/News.vue'),
       }
     ]
+  },
+
+  {
+    path: '/creditcalc',
+    component: () => import('@/layouts/PrimaryLayout.vue'),
+    children: [
+      {
+        path: '',
+        name: 'credit-calc',
+        component: () => import('@/pages/CreditCalc.vue'),
+      }
+    ]
   }
 ]
 

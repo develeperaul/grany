@@ -3,7 +3,7 @@ import { createStore } from 'vuex'
 export default createStore({
   state: {
     navShowed: false,
-    dialogCallbackShowed: false
+    dialogCallbackShowed: false,
   },
   getters: {
   },

@@ -16,7 +16,7 @@ export default {
   components: {
     NavFullScreen,
     CookieAccept,
-    DialogCallback
+    DialogCallback,
   }
 }
 </script>

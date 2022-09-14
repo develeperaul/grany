@@ -2,10 +2,10 @@
   <div class="tw-py-40 tw-px-16 md:tw-px-[98px] md:tw-py-80 lg:tw-px-[50px] lg:tw-py-40 2xl:tw-px-[150px] 2xl:tw-py-[50px] tw-bg-dark tw-relative">
     <div class="tw-max-w-[343px] lg:tw-max-w-[430px] 2xl:tw-max-w-[620px] tw-w-full tw-mx-auto tw-relative tw-z-10">
       <p class="tw-max-w-[280px] 2xl:tw-max-w-[465px] lg:tw-max-w-full tw-mb-10 tw-text-lg 2xl:tw-text-xl10 tw-leading-[84%] tw-font-extrabold">
-        заказать звонок
+        заявка на бронь
       </p>
       <p class="tw-text-secondary tw-text-md tw-leading-120 tw-mb-30 2xl:tw-max-w-[430px]">
-        Оставьте завяку, и наши менеджеры свяжутся с вами в&nbsp;течение 30 мин
+        Оставьте завяку, и наши менеджеры свяжутся с вами в течение 30 мин
       </p>
       <Form @submit="1">
         <div class="tw-flex tw-flex-wrap -tw-ml-10">
@@ -27,6 +27,5 @@
         </div>
       </Form>
     </div>
-    <slot />
   </div>
 </template>
