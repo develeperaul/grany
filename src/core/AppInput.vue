@@ -8,14 +8,25 @@
       }"
     >
       <div class="tw-flex-grow tw-relative">
-        <input v-bind="listeners" :id="name" class="tw-block tw-w-full tw-h-full full input" type="text" v-model="value">
+        <input v-bind="listeners" :id="name" class="tw-block tw-w-full tw-h-full full input" :type="type" v-model="value">
         <label :for="name" class="label" :class="{ 'dirty': hasValue }">{{ label }}</label>
       </div>
       <div v-if="$slots.append" class="tw-h-[50px] tw-shrink-0 tw-pl-8 tw-flex tw-items-center">
         <slot name="append" />
       </div>
+      <div v-else-if="type === 'number'" class="tw-h-[50px] tw-shrink-0 tw-pl-8 tw-flex tw-items-center">
+        <button type="button" class="tw-p-2">
+          <AppIcon name="level-up" size="18px" @click="value = `${+value + 1}`" />
+        </button>
+        <button type="button" class="tw-p-2 tw-rotate-180">
+          <AppIcon name="level-up" size="18px" @click="value = `${+value - 1}`" />
+        </button>
+      </div>
     </div>
     <p v-if="errorMessage" class="errorMessage" :title="errorMessage">{{ errorMessage }}</p>
+    <div v-if="$slots.caption" class="caption">
+      <slot name="caption" />
+    </div>
   </div>
 </template>
 
@@ -26,6 +37,10 @@ import { computed, ref } from 'vue';
 
 export default {
   props: {
+    type: {
+      default: 'text',
+      type: String
+    },
     ...Field.props
   },
   setup(props) {
@@ -60,6 +75,17 @@ export default {
     height: 100%;
   }
 
+  .input::-webkit-outer-spin-button,
+  .input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+  }
+
+  /* Firefox */
+  .input[type=number] {
+    -moz-appearance: textfield;
+  }
+
   .input:focus + .label, .label.dirty {
     transform: translateY(0px);
     top: 0;
@@ -80,10 +106,13 @@ export default {
     right: 0;
   }
 
-  .errorMessage {
+  .errorMessage, .caption {
     position: absolute;
     top: 100%;
     transform: translateY(-18px);
+  }
+
+  .errorMessage {
     @apply tw-text-xs tw-text-negative tw-leading-100;
   }
 </style>

@@ -1,5 +1,5 @@
 <template>
-  <app-page class="xl-separator tw-relative">
+  <app-page class="xl-separator tw-relative page-pb">
     <div class="wrapper">
       <h1 class="h1 tw-mb-20 2xl:tw-mb-40">условия покупки</h1>
 
@@ -20,14 +20,14 @@
           </div>
         </div>
 
-        <TabsContent v-model="tabValue" class="md:tw-max-w-[680px] lg:tw-max-w-[840px] 2xl:tw-w-1/2">
+        <TabsContent v-model="tabValue" class="md:tw-max-w-[680px] lg:tw-max-w-[900px] 2xl:tw-w-1/2">
           <TabsContentItem
             v-for="(section, key) in content"
             :key="key"
             :name="key"
           >
             <section>
-              <h2 class="tw-text-lg tw-text-secondary tw-font-extrabold tw-mb-20 2xl:tw-text-xl">
+              <h2 class="tw-text-lg tw-lowercase tw-text-secondary tw-font-extrabold tw-mb-20 2xl:tw-text-xl">
                 {{ tabs[key].label }}
               </h2>
               <ul class="2xl:tw-flex 2xl:tw-flex-wrap 2xl:-tw-ml-48 -tw-mt-10">
@@ -40,6 +40,14 @@
                     {{ li.text }}
                   </li>
               </ul>
+              <AppButton
+                v-if="tabValue === 'calc'"
+                class="tw-mt-30"
+                :to="{ name: 'credit-calc' }"
+                @click="$router.push({ name: 'credit-calc' })"
+              >
+                Ипотечный калькулятор
+              </AppButton>
             </section>
           </TabsContentItem>
         </TabsContent>
