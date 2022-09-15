@@ -202,16 +202,4 @@ export default {
   flex-shrink: 0;
   transform: rotate(-45deg);
 }
-
-@screen 2xl {
-  .xl-separator::after {
-    content: "";
-    position: absolute;
-    width: 1px;
-    background: theme('colors.dark');
-    height: 100%;
-    left: calc(50% - 78px);
-    top: 0;
-  }
-}
 </style>

@@ -93,5 +93,15 @@
     .h1 {
       @apply tw-text-xl10;
     }
+
+    .xl-separator::after {
+      content: "";
+      position: absolute;
+      width: 1px;
+      background: theme('colors.dark');
+      height: 100%;
+      left: calc(50% - 78px);
+      top: 0;
+    }
   }
 }
