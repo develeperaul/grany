@@ -1,5 +1,6 @@
 import vClickOutside from "click-outside-vue3";
 import YmapPlugin from 'vue-yandex-maps';
+import VueScreen from 'vue-screen';
 
 export default (app) => {
   const settings = {
@@ -11,5 +12,14 @@ export default (app) => {
   }
 
   app.use(vClickOutside);
-  app.use(YmapPlugin, settings)
+  app.use(YmapPlugin, settings);
+  app.use(VueScreen, {
+    grid: {
+      sm: 640,
+      md: 768,
+      lg: 1024,
+      xl: 1200,
+      '2xl': 1920,
+    }
+  });
 }
