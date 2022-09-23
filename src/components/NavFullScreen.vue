@@ -1,9 +1,9 @@
 <template>
   <div class="dialog-full tw-overflow-x-hidden" v-if="value">
-    <div class="tw-min-h-full tw-relative tw-z-0 layout-base tw-overflow-y-hidden">
+    <div class="tw-min-h-full tw-relative tw-z-0 layout-base tw-overflow-hidden">
       <Header />
       <div class="tw-pt-30 tw-pb-30 2xl:tw-pt-[100px]">
-        <div class="wrapper tw-relative decor">
+        <div class="wrapper tw-relative decor-rock">
           <div class="lg:tw-pl-[90px] 2xl:tw-pl-[904px]">
             <div class="links tw-mb-30 md:tw-mb-40">
               <nav class="menu tw-space-y-14 md:tw-space-y-20">
@@ -86,38 +86,5 @@ export default {
 <style scoped lang="scss">
 .links {
   max-width: 600px;
-}
-
-@screen md {
-  .decor::after {
-    content: '';
-    width: 1030px;
-    height: 1030px;
-    position: absolute;
-    z-index: -1;
-    top: -145px;
-    right: -392px;
-    background-image: url(@/assets/images/3d-gora.png);
-    background-repeat: no-repeat;
-    background-blend-mode: difference;
-    background-size: cover;
-    @apply tw-bg-primary;
-  }
-}
-
-@screen xl {
-  .decor::after {
-    top: -94px;
-    right: -281px;
-  }
-}
-
-@screen 2xl {
-  .decor::after {
-    width: 1260px;
-    height: 1260px;
-    left: 0;
-    top: -183px;
-  }
 }
 </style>

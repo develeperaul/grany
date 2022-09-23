@@ -106,7 +106,7 @@ const routes = [
 
   {
     path: '/documents',
-    component: () => import('@/layouts/PrimaryLayout.vue'),
+    component: () => import('@/layouts/SecondaryLayout.vue'),
     children: [
       {
         path: '',
@@ -136,6 +136,19 @@ const routes = [
         path: '',
         name: 'credit-calc',
         component: () => import('@/pages/CreditCalc.vue'),
+      }
+    ]
+  },
+
+
+  {
+    path: '/:pathMatch(.*)*',
+    component: () => import('@/layouts/SecondaryLayout.vue'),
+    children: [
+      {
+        path: '',
+        name: 'fallback',
+        component: () => import('@/pages/Fallback404.vue'),
       }
     ]
   }
