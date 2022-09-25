@@ -25,6 +25,6 @@ export default () => {
   defineRule('size', size);
   defineRule('cellphone', function (value) {
     if(!value) return true;
-    return /^8 \(\d{3}\) \d{3} \d{2} \d{2}$/.test(value)
+    return /^\+7 \(\d{3}\) \d{3}\-\d{2}\-\d{2}$/.test(value)
   });
 }

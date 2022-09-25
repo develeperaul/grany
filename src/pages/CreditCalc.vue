@@ -115,7 +115,7 @@ export default {
   },
   methods: {
     showCaption() {
-      this.showedCaption = !this.showedCaption
+      this.showedCaption = !this.showedCaption;
     },
     submit() {
       this.showedDialog = true;

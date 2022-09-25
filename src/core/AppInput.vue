@@ -8,7 +8,14 @@
       }"
     >
       <div class="tw-flex-grow tw-relative">
-        <input v-bind="listeners" :id="name" class="tw-block tw-w-full tw-h-full full input" :type="type" v-model="value">
+        <input
+          class="tw-block tw-w-full tw-h-full full input"
+          :type="type"
+          :id="name"
+          v-model="value"
+          v-bind="listeners"
+          v-maska="type === 'tel' ? '+7 (9##) ###-##-##' : ''"
+        >
         <label :for="name" class="label" :class="{ 'dirty': hasValue }">{{ label }}</label>
       </div>
       <div v-if="$slots.append" class="tw-h-[50px] tw-shrink-0 tw-pl-8 tw-flex tw-items-center">
@@ -24,7 +31,7 @@
       </div>
     </div>
     <p v-if="errorMessage" class="errorMessage" :title="errorMessage">{{ errorMessage }}</p>
-    <div v-if="$slots.caption" class="caption">
+    <div v-if="$slots.caption && !errorMessage" class="caption">
       <slot name="caption" />
     </div>
   </div>

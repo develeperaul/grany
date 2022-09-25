@@ -16,12 +16,13 @@
             label="Ваше имя"
           />
           <AppInput
-            rules="required"
+            rules="required|cellphone"
             class="tw-pl-10 tw-basis-full lg:tw-basis-1/2 2xl:tw-basis-[210px]"
             name="cellphone"
             label="Номер телефона"
+            type="tel"
           />
-          <AppButton class="tw-ml-[10px] 2xl:tw-ml-15 tw-basis-full 2xl:tw-basis-[175px] tw-self-start" type="submit">
+          <AppButton class="tw-ml-[10px] tw-mt-12 2xl:tw-ml-15 tw-basis-full 2xl:tw-basis-[175px] tw-self-start" type="submit">
             Отправить
           </AppButton>
         </div>

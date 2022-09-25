@@ -1,6 +1,7 @@
 import vClickOutside from "click-outside-vue3";
 import YmapPlugin from 'vue-yandex-maps';
 import VueScreen from 'vue-screen';
+import Maska from 'maska';
 
 export default (app) => {
   const settings = {
@@ -13,6 +14,8 @@ export default (app) => {
 
   app.use(vClickOutside);
   app.use(YmapPlugin, settings);
+  app.use(Maska);
+
   app.use(VueScreen, {
     grid: {
       sm: 640,
