@@ -1,5 +1,5 @@
 <template>
-  <app-page class="2xl:tw-pt-[100px]">
+  <app-page class="2xl:tw-pt-[100px] page-pb">
     <div class="wrapper tw-relative decor-rock after:tw-content-none 2xl:after:tw-content-['']">
       <div class="2xl:tw-flex 2xl:tw-justify-between">
         <div class="tw-mb-20">
@@ -13,7 +13,7 @@
             <img class="tw-w-full" width="288" height="107" src="@/assets/images/fallback.svg" alt="404">
           </div>
           <div class="md:tw-text-center xl:tw-text-left">
-            <AppLink class="md:tw-inline-flex" external to="#">На главную</AppLink>
+            <AppLink class="md:tw-inline-flex" external :to="{ name: 'main' }">На главную</AppLink>
           </div>
         </div>
       </div>

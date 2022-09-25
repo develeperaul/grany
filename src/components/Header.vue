@@ -14,7 +14,7 @@
           </router-link>
 
           <router-link
-            class="tw-hidden lg:tw-block tw-pt-4 tw-pr-4 tw-mr-24"
+            class="tw-hidden lg:tw-block tw-pt-4 tw-pr-4 tw-mr-24 lg:hover:tw-underline"
             :to="{ name: 'about' }"
           >
             О проекте
@@ -23,28 +23,28 @@
           <div class="tw-hidden 2xl:tw-grow 2xl:tw-block"></div>
 
           <router-link
-            class="tw-hidden lg:tw-flex lg:tw-items-center lg:tw-mr-24"
+            class="tw-hidden lg:tw-flex lg:tw-items-center lg:tw-mr-24 lg:hover:tw-underline"
             :to="{ name: 'flats.params' }"
           >
             <svg class="tw-w-[36px] tw-h-[36px] lg:tw-mr-14">
               <use xlink:href="#b-key"></use>
             </svg>
-            <div class="tw-underline tw-leading-100">Подобрать квартиру</div>
+            <div class="tw-leading-100">Подобрать квартиру</div>
           </router-link>
 
           <div class="tw-hidden lg:tw-flex tw-mr-16 2xl:tw-mr-20">
             <router-link
-              class="tw-flex tw-items-center tw-bg-orangeHover tw-rounded-l-md lg:tw-px-8 xl:tw-px-14 tw-py-10"
-              to="/"
+              class="tw-flex tw-items-center tw-bg-orange tw-rounded-l-md lg:tw-px-8 lg:hover:tw-underline lg:hover:tw-bg-orangeHover xl:tw-px-14 tw-py-10"
+              :to="{ name: 'flats.params' }"
             >
               <svg class="tw-w-[30px] tw-h-[30px] tw-mr-10 tw-fill-white">
                 <use xlink:href="#fasad"></use>
               </svg>
-              <div class="tw-underline tw-leading-100 tw-pt-4">на фасаде</div>
+              <div class="tw-leading-100 tw-pt-4">на фасаде</div>
             </router-link>
 
             <router-link
-              class="tw-flex tw-items-center tw-bg-orange tw-rounded-r-md lg:tw-px-8 xl:tw-px-14 tw-py-10"
+              class="tw-flex tw-items-center tw-bg-orange tw-rounded-r-md lg:tw-px-8 lg:hover:tw-underline lg:hover:tw-bg-orangeHover xl:tw-px-14 tw-py-10"
               :to="{ name: 'flats.params' }"
             >
               <svg class="tw-w-[30px] tw-h-[30px] tw-mr-10 tw-fill-white">
@@ -56,7 +56,7 @@
 
           <div class="tw-hidden lg:tw-block tw-leading-120 lg:tw-mr-20 xl:tw-mr-[42px] 2xl:tw-mr-[124px]">
             <a
-              class="lg:tw-text-sm xl:tw-text-md tw-mb-2 tw-block"
+              class="lg:tw-text-sm xl:tw-text-md tw-mb-2 tw-block lg:hover:tw-opacity-90"
               href="tel:+73472586677"
             >
               +7 (347) 258-66-77
@@ -64,6 +64,7 @@
             <AppLink
               sizeClasses="lg:tw-text-sm xl:tw-text-base"
               external
+              native
               to="#"
               @click.prevent="callbackToggle"
             >
@@ -72,7 +73,7 @@
           </div>
 
           <button
-            class="tw-order-first lg:tw-order-none tw-w-[36px] tw-h-[36px] lg:tw-w-48 lg:tw-h-48"
+            class="tw-order-first lg:tw-order-none tw-w-[36px] tw-h-[36px] lg:tw-w-48 lg:tw-h-48 lg:hover:tw-opacity-90"
             @click="navToggle"
           >
             <svg class="tw-w-full tw-h-full">
@@ -97,21 +98,21 @@
         <div class="tw-flex">
           <router-link
             class="tw-w-1/2 tw-flex tw-items-center tw-bg-orange tw-rounded-l-md tw-px-8 tw-py-15 tw-border-r tw-border-[#DB5C00]"
-            to="/"
+            :to="{ name: 'flats.params'  }"
           >
             <svg class="tw-w-[30px] tw-h-[30px] tw-mr-10 tw-fill-white">
               <use xlink:href="#fasad"></use>
             </svg>
-            <div class="tw-underline tw-leading-100 tw-pt-4">на фасаде</div>
+            <div class="tw-leading-100 tw-pt-4">на фасаде</div>
           </router-link>
           <router-link
             class="tw-w-1/2 tw-flex tw-items-center tw-bg-orange tw-rounded-r-md tw-px-8 tw-py-15"
-            to=""
+            :to="{ name: 'flats.params' }"
           >
             <svg class="tw-w-[30px] tw-h-[30px] tw-mr-10 tw-fill-white">
               <use xlink:href="#params"></use>
             </svg>
-            <div class="tw-underline tw-leading-100 tw-pt-4">по параметрам</div>
+            <div class="tw-leading-100 tw-pt-4">по параметрам</div>
           </router-link>
         </div>
       </div>

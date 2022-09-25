@@ -13,12 +13,12 @@
 
         <div class="tw-flex tw-mr-8 lg:tw-mr-60 tw-space-x-8">
           <a
-            v-for="item in ['#wts', '#tg', '#vk']"
-            :key="item"
-            href="#"
+            v-for="item in soc"
+            :key="item.name"
+            :href="item.link"
             class="tw-h-24 tw-w-24 tw-block"
           >
-            <svg class="tw-w-full tw-h-full"><use :xlink:href="item"></use></svg>
+            <svg class="tw-w-full tw-h-full"><use :xlink:href="item.name"></use></svg>
           </a>
         </div>
 
@@ -40,7 +40,24 @@
 
 <script>
 export default {
-
+  data() {
+    return {
+      soc: [
+        {
+          name: '#wts',
+          link: 'https://wa.me/73472242041?roistat_visit=960005'
+        },
+        {
+          name: '#tg',
+          link: 'https://wa.me/73472242041?roistat_visit=960005'
+        },
+        {
+          name: '#vk',
+          link: 'https://vk.com/agidelinvest?roistat_visit=960005'
+        }
+      ]
+    }
+  }
 }
 </script>
 

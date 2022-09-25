@@ -10,8 +10,8 @@
       <div class="-tw-mx-16 md:tw-mx-0">
         <img
           class="md:tw-mx-0 tw-w-full tw-h-[400px] md:tw-h-[500px] lg:tw-h-[540px] 2xl:tw-h-[620px] tw-object-cover tw-object-left-bottom xl:tw-object-[0px_-250px] 2xl:tw-object-[0px_-450px]"
-          width="3060"
-          height="1240"
+          width="2175"
+          height="1574"
           src="@/assets/images/about/render.jpg"
           alt="рендер жк"
         >

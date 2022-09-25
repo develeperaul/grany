@@ -7,7 +7,7 @@
           <h2 class="project-sheet__title">архитектура</h2>
         </div>
         <div class="md:tw-max-w-[435px] 2xl:tw-max-w-[470px] md:tw-pl-[60px] 2xl:tw-ml-auto tw-mb-20 2xl:tw-mb-40 tw-px-16 md:tw-px-0">
-          <AppLink class="tw-mb-20" external to="#location">Расположение</AppLink>
+          <AppLink class="tw-mb-20" external :to="{ name: 'location' }">Расположение</AppLink>
           <p>{{ arc.text }}</p>
         </div>
 
@@ -99,7 +99,7 @@
         </div>
         <div class="md:tw-pl-[60px] 2xl:tw-pl-[150px] tw-pt-20 md:tw-pt-0">
           <img
-            width="1400"
+            width="1550"
             height="720"
             src="@/assets/images/about/parking.jpg"
             loading="lazy"

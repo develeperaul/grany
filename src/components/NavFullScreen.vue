@@ -8,7 +8,8 @@
             <div class="links tw-mb-30 md:tw-mb-40">
               <nav class="menu tw-space-y-14 md:tw-space-y-20">
                 <router-link
-                  class="tw-text-md md:tw-text-xl tw-block tw-font-extrabold tw-leading-120"
+                  class="tw-text-md md:tw-text-xl tw-block tw-font-extrabold tw-leading-120 lg:hover:tw-opacity-80 tw-transition-opacity"
+                  active-class="tw-text-orangeHover"
                   v-for="item in nav"
                   :key="item.label"
                   :to="item.to"
@@ -22,16 +23,16 @@
               class="tw-max-w-[400px] tw-flex tw-flex-wrap -tw-ml-30 -tw-mt-20"
             >
               <div class="tw-w-full md:tw-w-1/2 tw-pl-30 tw-pt-20">
-                <AppLink external to="#news">Новости и акции</AppLink>
+                <AppLink external :to="{ name: 'news' }">Новости и акции</AppLink>
               </div>
               <div class="tw-w-full md:tw-w-1/2 tw-pl-30 tw-pt-20">
-                <AppLink external to="#progress">Ход строительства</AppLink>
+                <AppLink external :to="{ name: 'progress' }">Ход строительства</AppLink>
               </div>
               <div class="tw-w-full md:tw-w-1/2 tw-pl-30 tw-pt-20">
-                <AppLink external to="#documents">Документы</AppLink>
+                <AppLink external :to="{ name: 'documents' }">Документы</AppLink>
               </div>
               <div class="tw-w-full md:tw-w-1/2 tw-pl-30 tw-pt-20">
-                <AppLink external to="#developer">Застройщик</AppLink>
+                <AppLink external :to="{ name: 'developer' }">Застройщик</AppLink>
               </div>
             </div>
           </div>
@@ -43,6 +44,8 @@
 </template>
 
 <script>
+import { mapMutations } from 'vuex';
+
 export default {
   name: 'NavFullScreen',
   data() {
@@ -56,10 +59,6 @@ export default {
           label: 'расположение',
           to: { name: 'location' },
         },
-        // {
-        //   label: 'благоустройство',
-        //   to: { name: 'main' },
-        // },
         {
           label: 'галерея',
           to: { name: 'gallery' },
@@ -80,6 +79,9 @@ export default {
       return this.$store.state.navShowed;
     },
   },
+  methods: {
+    ...mapMutations(['navToggle']),
+  }
 };
 </script>
 

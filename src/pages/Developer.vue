@@ -29,7 +29,9 @@
             </div>
           </div>
           <div>
-            <AppLink class="tw-text-base" external to="#">О застройщике</AppLink>
+            <AppLink external native target="_blank" to="https://www.aisrb.ru/page-o_kompanii.php?roistat_visit=960005">
+              О застройщике
+            </AppLink>
           </div>
         </div>
       </div>
