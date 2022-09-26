@@ -28,7 +28,7 @@
     >
       <swiper-slide  v-for="i in 4" :key="i">
         <img
-          :data-src="`/gallery/g${i}.jpeg`"
+          :data-src="`/gallery/g${i}.jpg`"
           class="swiper-lazy tw-w-full tw-h-full tw-object-cover"
         />
         <div class="swiper-lazy-preloader swiper-lazy-preloader-white"></div>

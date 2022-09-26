@@ -22,7 +22,7 @@
             class="tw-w-1/2 tw-pl-10 tw-pt-10 md:tw-w-1/3"
             title="Январь 2021 г."
             picCount="25"
-            picSrc="/gallery/g1.jpeg"
+            picSrc="/gallery/g1.jpg"
             @click="showedGallery = true"
           />
         </div>
@@ -34,7 +34,7 @@
         <div v-if="$grid['2xl']" class="tw-relative overlay">
           <div class="tw-flex tw-flex-wrap -tw-mx-10 -tw-mt-20 tw-overflow-x-hidden app-scroll-y">
             <div class="tw-w-1/2 tw-px-10 tw-pt-20 tw-cursor-pointer" v-for="i in 10" :key="i" @click="showedGallery = true">
-              <img src="/gallery/g1.jpeg" alt="" />
+              <img src="/gallery/g1.jpg" alt="" />
             </div>
           </div>
         </div>
@@ -48,7 +48,7 @@
       >
         <AppIcon name="close" size="36px" fill="white" />
       </button>
-      <SwiperGallery :sources="['/gallery/g1.jpeg', '/gallery/g2.jpeg', '/gallery/g3.jpeg', '/gallery/g4.jpeg']" />
+      <SwiperGallery :sources="['/gallery/g1.jpg', '/gallery/g2.jpg', '/gallery/g3.jpg', '/gallery/g4.jpg']" />
     </div>
   </app-page>
 </template>
