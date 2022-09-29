@@ -10,6 +10,7 @@ export default (app) => {
   app.component('AppIcon', require('@/core/AppIcon.vue').default);
   app.component('AppButton', require('@/core/AppButton.vue').default);
   app.component('AppInput', require('@/core/AppInput.vue').default);
+  app.component('AppCheckbox', require('@/core/AppCheckbox.vue').default);
   app.component('AppSelect', require('@/core/AppSelect.vue').default);
   app.component('AppPage', require('@/core/AppPage.vue').default);
   app.component('Header', require('@/components/Header.vue').default);

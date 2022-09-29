@@ -26,6 +26,9 @@
             Отправить
           </AppButton>
         </div>
+        <AppCheckbox class="tw-mt-24" name="agreement" label="Условия" rules="required">
+          Я согласен с <AppLink native to="https://ya.ru" target="_blank">условиями передачи информации</AppLink>
+        </AppCheckbox>
       </Form>
     </div>
     <slot />
