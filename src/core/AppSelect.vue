@@ -52,16 +52,14 @@
 </template>
 
 <script>
-let resizer;
 import { throttle } from 'throttle-debounce';
 
 export default {
   mounted() {
-    resizer = throttle(50, this.setCoords);
-    window.addEventListener('resize', resizer);
+    window.addEventListener('resize', this.resizer);
   },
   unmounted() {
-    window.removeEventListener('resize', resizer);
+    window.removeEventListener('resize', this.resizer);
   },
   props: {
     display: {
@@ -77,6 +75,7 @@ export default {
   emits: ['update:modelValue'],
   data() {
     return {
+      resizer: throttle(50, this.setCoords),
       showed: false,
       coords: {
         x: 0,

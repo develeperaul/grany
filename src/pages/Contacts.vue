@@ -24,7 +24,7 @@
         </div>
         <div class="tw-mb-40 md:tw-mb-0 xl:tw-w-1/2 2xl:tw-order-2">
           <yandex-map
-            class="tw-mix-blend-luminosity tw-h-[290px] md:tw-h-[390px] xl:tw-h-[580px] 2xl:tw-h-[440px]"
+            class="tw-mix-blend-luminosity tw-relative tw-z-10 tw-h-[290px] md:tw-h-[390px] xl:tw-h-[580px] 2xl:tw-h-[440px]"
             :coords="[54.709725, 55.828768]"
             :zoom="15"
             :controls="[]"

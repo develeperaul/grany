@@ -132,10 +132,13 @@ export default {
     on(slider, coords, direction) {
       const onMoudedown = (event) => {
         event.preventDefault();
+        if(event.touches) event = event.touches[0];
 
         coords.shiftX = event.clientX - slider.getBoundingClientRect().left;
 
         const onMouseMove = (event) => {
+          if(event.touches) event = event.touches[0];
+
           coords.left = event.clientX - coords.shiftX - this.area.getBoundingClientRect().left;
 
           // ограничить левый край
@@ -175,13 +178,18 @@ export default {
           this.$emit('update:range', [this.val1, this.val2]);
           document.removeEventListener('mouseup', onMouseUp);
           document.removeEventListener('mousemove', onMouseMove);
+          document.removeEventListener('touchend', onMouseUp);
+          document.removeEventListener('touchmove', onMouseMove);
         };
 
         document.addEventListener('mousemove', onMouseMove);
         document.addEventListener('mouseup', onMouseUp);
+        document.addEventListener('touchmove', onMouseMove);
+        document.addEventListener('touchend', onMouseUp);
       };
 
       slider.addEventListener('mousedown', onMoudedown);
+      slider.addEventListener('touchstart', onMoudedown);
     },
   },
 };
