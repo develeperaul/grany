@@ -5,7 +5,7 @@
         заявка на бронь
       </p>
       <p class="tw-text-secondary tw-text-md tw-leading-120 tw-mb-30 2xl:tw-max-w-[430px]">
-        Оставьте завяку, и наши менеджеры свяжутся с вами в течение 30 мин
+        Оставьте заявку, и наши менеджеры свяжутся с вами в течение 30 мин
       </p>
       <Form @submit="1">
         <div class="tw-flex tw-flex-wrap -tw-ml-10">
