@@ -7,7 +7,7 @@
       <p class="tw-text-secondary tw-text-md tw-leading-120 tw-mb-30 2xl:tw-max-w-[430px]">
         Оставьте заявку, и наши менеджеры свяжутся с вами в&nbsp;течение 30 мин
       </p>
-      <Form @submit="1">
+      <Form v-slot="{ isSubmitting }" @submit="submit">
         <div class="tw-flex tw-flex-wrap -tw-ml-10">
           <AppInput
             class="tw-pl-10 tw-basis-full lg:tw-basis-1/2 2xl:tw-basis-[210px]"
@@ -22,7 +22,11 @@
             label="Номер телефона"
             type="tel"
           />
-          <AppButton class="tw-ml-[10px] tw-mt-12 2xl:tw-ml-15 tw-basis-full 2xl:tw-basis-[175px] tw-self-start" type="submit">
+          <AppButton
+            class="tw-ml-[10px] tw-mt-12 2xl:tw-ml-15 tw-basis-full 2xl:tw-basis-[175px] tw-self-start"
+            type="submit"
+            :disabled="isSubmitting"
+          >
             Отправить
           </AppButton>
         </div>
@@ -34,3 +38,13 @@
     <slot />
   </div>
 </template>
+<script>
+export default {
+  methods: {
+    async submit({ name, cellphone }) {
+      await this.$store.dispatch('getFeedback', { name, cellphone, theme: 'Обратный звонок' });
+      alert('Заявка успешна отправлена');
+    }
+  }
+}
+</script>

@@ -1,4 +1,7 @@
-import { createStore } from 'vuex'
+import { createStore } from 'vuex';
+import api from '@/api/utilities/service';
+const client_id = 1;
+const client_secret = 'WNTfhwextCXKVTYOHoD4ZDflGKOTlnqiL0jjMFBW';
 
 export default createStore({
   state: {
@@ -20,6 +23,24 @@ export default createStore({
     }
   },
   actions: {
+    async getFeedback(_c, { theme, name, cellphone }) {
+      const response = await api.swot.post('feedback', {
+        json: {
+          client_id,
+          client_secret,
+          email_ids: [2],
+          theme: theme,
+          user_name: name,
+          user_phone: cellphone,
+          crm_lead: 0,
+          _dictionary: {
+            user_name: "Имя пользователя",
+          }
+        }
+      }).json();
+
+      console.log(response);
+    }
   },
   modules: {
     news: require('./news').default,
