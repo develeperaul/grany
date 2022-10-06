@@ -1,5 +1,7 @@
 <template>
   <router-view />
+  <notifications />
+  <notifications group="error" position="bottom center" />
   <NavFullScreen />
   <DialogCallback />
   <teleport to="body">

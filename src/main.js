@@ -8,6 +8,7 @@ const app = createApp(App);
 
 require('./registr-components').default(app);
 require('./registr-plugins').default(app);
+require('./registr-error-handler').default(app);
 require('./registr-validators').default();
 
 app.use(store).use(router).mount('#app');

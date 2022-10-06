@@ -2,6 +2,7 @@ import vClickOutside from "click-outside-vue3";
 import YmapPlugin from 'vue-yandex-maps';
 import VueScreen from 'vue-screen';
 import Maska from 'maska';
+import Notifications from '@kyvg/vue3-notification'
 
 export default (app) => {
   const settings = {
@@ -14,6 +15,7 @@ export default (app) => {
 
   app.use(vClickOutside);
   app.use(YmapPlugin, settings);
+  app.use(Notifications);
   app.use(Maska);
 
   app.use(VueScreen, {
