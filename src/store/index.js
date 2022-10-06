@@ -23,5 +23,6 @@ export default createStore({
   },
   modules: {
     news: require('./news').default,
+    loaders: require('./loaders').default,
   }
 })

@@ -1,5 +1,5 @@
 <template>
-  <div class="lds-ring">
+  <div class="lds-ring" :style="{ '--size': size }">
     <div></div>
     <div></div>
     <div></div>
@@ -9,7 +9,12 @@
 
 <script>
 export default {
-
+  props: {
+    size: {
+      default: '80px',
+      type: String
+    }
+  }
 }
 </script>
 
@@ -17,7 +22,7 @@ export default {
 .lds-ring {
   display: inline-block;
   position: relative;
-  font-size: 180px;
+  font-size: var(--size);
   width: 1em;
   height: 1em;
 }
@@ -29,7 +34,7 @@ export default {
   width: 0.8em;
   height: 0.8em;
   margin: 0.1em;
-  border: 0.1em solid theme('colors.orange');
+  border: 0.05em solid theme('colors.orange');
   border-radius: 50%;
   animation: lds-ring 1.2s cubic-bezier(0.5, 0, 0.5, 1) infinite;
   border-color: theme('colors.orange') transparent transparent transparent;
