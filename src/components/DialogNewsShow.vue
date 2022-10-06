@@ -8,7 +8,10 @@
         </button>
       </div>
 
-      <NewsShow :id="showedId.value" />
+      <div class="tw-absolute">
+        <Spinner v-if="$store.getters['loaders/is']('news one')" />
+      </div>
+      <NewsShow v-if="content" :content="content" :id="showedId.value" />
 
       <div class="btn-group">
         <button
@@ -49,6 +52,12 @@
 import NewsShow from './NewsShow.vue';
 
 export default {
+  props: {
+    content: {
+      required: true,
+      type: [Object, null]
+    }
+  },
   inject: ['showedId', 'show', 'prev', 'next', 'closestIds'],
   emits: ['update:showedId'],
   components: {

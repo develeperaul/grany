@@ -1,7 +1,7 @@
 <template>
   <article class="tw-pb-16 md:tw-pb-10 tw-border-b tw-border-dark tw-cursor-pointer lg:hover:tw-opacity-70" role="link">
-    <div class="tw-text-secondary tw-mb-4">{{ createdAt }}</div>
-    <h2 class=" tw-text-md">{{ title }}</h2>
+    <div class="tw-text-secondary tw-mb-4">{{ created }}</div>
+    <h2 class=" tw-text-md">{{ name }}</h2>
   </article>
 </template>
 
@@ -12,11 +12,11 @@ export default {
       required: true,
       type: [Number, String]
     },
-    title: {
+    name: {
       required: true,
       type: String
     },
-    createdAt: {
+    created: {
       required: true,
       type: String
     },

@@ -4,14 +4,25 @@
       <div class="2xl:tw-h-full news">
         <div class="left app-scroll-y tw-pt-20">
           <h1 class="h1 tw-mb-20">новости и акции</h1>
-          <NewsList :items="items" />
+          <NewsList v-if="items" :items="items" />
+          <div
+            class="tw-text-center tw-pt-20"
+            v-if="$store.getters['loaders/is']('get news')"
+          >
+            <Spinner class="tw-mx-auto" />
+          </div>
         </div>
-        <NewsShow
-          v-if="$grid['2xl'] && showedId.value !== null"
-          class="right app-scroll-y tw-pt-20"
-          :id="showedId.value"
-        />
-        <DialogNewsShow v-if="!$grid['2xl']" />
+        <div v-if="$grid['2xl']" class="right app-scroll-y tw-pt-20 tw-relative">
+          <NewsShow
+            v-if="detailed"
+            :id="showedId.value"
+            :content="detailed"
+          />
+          <div v-if="$store.getters['loaders/is']('news one')" class="tw-absolute tw-top-0">
+            <Spinner size="120px" />
+          </div>
+        </div>
+        <DialogNewsShow v-if="!$grid['2xl']" :content="detailed" />
       </div>
     </div>
   </app-page>
@@ -29,25 +40,40 @@ export default {
       closestIds: () => this.closestIds,
       show: (id) => {
         this.showedId.value = id;
+        if(id) this.newsOne(id);
       },
       prev: () => {
         this.showedId.value = this.closestIds.prev;
+        this.newsOne(this.showedId.value);
       },
       next: () => {
         this.showedId.value = this.closestIds.next;
+        this.newsOne(this.showedId.value);
       }
     }
+  },
+  async created() {
+    this.getNews();
   },
   data() {
     return {
       showedId: {
         value: null
       },
-      items: [
-        { title: 'новые планировки на сайте', createdAt: '30 мая 2022 г.', id: 1 },
-        { title: 'новые планировки на сайте', createdAt: '30 мая 2022 г.', id: 4 },
-        { title: 'новые планировки на сайте', createdAt: '30 мая 2022 г.', id: 2 },
-      ]
+      detailed: null,
+      items: null
+    }
+  },
+  methods: {
+    async getNews() {
+      this.$store.dispatch('loaders/start', 'get news');
+      this.items = await this.$store.dispatch('news/getNews');
+      this.$store.dispatch('loaders/end', 'get news');
+    },
+    async newsOne(id) {
+      this.$store.dispatch('loaders/start', 'news one');
+      this.detailed = await this.$store.dispatch('news/newsOne', { id });
+      this.$store.dispatch('loaders/end', 'news one');
     }
   },
   computed: {

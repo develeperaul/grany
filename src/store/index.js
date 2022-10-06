@@ -22,5 +22,6 @@ export default createStore({
   actions: {
   },
   modules: {
+    news: require('./news').default,
   }
 })
