@@ -16,5 +16,6 @@ export default (app) => {
   app.component('Header', require('@/components/Header.vue').default);
   app.component('Footer', require('@/components/Footer.vue').default);
   app.component('TabsContent', require('@/components/TabsContent.vue').default);
+  app.component('Spinner', require('@/components/Spinner.vue').default);
   app.component('TabsContentItem', require('@/components/TabsContentItem.vue').default);
 };
