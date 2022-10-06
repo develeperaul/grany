@@ -7,7 +7,7 @@
       <p class="tw-text-secondary tw-text-md tw-leading-120 tw-mb-30 2xl:tw-max-w-[430px]">
         Расчет кредита является предварительным, не является публичной офертой
       </p>
-      <Form @submit="1">
+      <Form v-slot="{ isSubmitting }" @submit="submit">
         <div class="tw-flex tw-flex-wrap -tw-ml-10">
           <AppInput
             class="tw-pl-10 tw-basis-full lg:tw-basis-1/2 2xl:tw-basis-[210px]"
@@ -22,12 +22,29 @@
             name="cellphone"
             label="Номер телефона"
           />
-          <AppButton class="tw-ml-[10px] tw-mt-12 2xl:tw-ml-15 tw-basis-full 2xl:tw-basis-[175px] tw-self-start" type="submit">
+          <AppButton
+            class="tw-ml-[10px] tw-mt-12 2xl:tw-ml-15 tw-basis-full 2xl:tw-basis-[175px] tw-self-start"
+            type="submit"
+            :disabled="isSubmitting"
+          >
             Отправить
           </AppButton>
         </div>
+        <AppCheckbox class="tw-mt-24" name="agreement" label="Условия" rules="required">
+          Я согласен с <AppLink native to="https://ya.ru" target="_blank">условиями передачи информации</AppLink>
+        </AppCheckbox>
       </Form>
     </div>
     <slot />
   </div>
 </template>
+<script>
+export default {
+  methods: {
+    async submit({ name, cellphone }) {
+      await this.$store.dispatch('getFeedback', { name, cellphone, theme: 'Заявка на ипотеку' });
+      this.$notify({ type: 'success', text: 'Ваша заявка успешно отправлена!' });
+    }
+  }
+}
+</script>

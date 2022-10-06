@@ -43,7 +43,7 @@ export default {
   methods: {
     async submit({ name, cellphone }) {
       await this.$store.dispatch('getFeedback', { name, cellphone, theme: 'Обратный звонок' });
-      alert('Заявка успешна отправлена');
+      this.$notify({ type: 'success', text: 'Ваша заявка успешно отправлена!' });
     }
   }
 }
