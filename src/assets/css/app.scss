@@ -110,3 +110,17 @@
     }
   }
 }
+
+.vue-notification {
+  padding: 20px 16px !important;
+  font-size: 16px !important;
+  font-family: Nexa, sans-serif !important;
+  border-radius: 6px;
+  letter-spacing: 0.02em;
+}
+
+
+.vue-notification.error {
+  background: theme('colors.negative') !important;
+  border-left-color: rgb(194, 7, 7) !important;
+}
