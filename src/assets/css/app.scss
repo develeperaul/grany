@@ -43,6 +43,10 @@
     @apply tw-pb-40
   }
 
+  .button-back {
+    @apply tw-text-secondary tw-underline tw-text-base;
+  }
+
   .app-scroll-x::-webkit-scrollbar {
     height: 1px;
   }

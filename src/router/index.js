@@ -16,6 +16,15 @@ const routes = [
         path: '',
         name: 'flats.params',
         component: () => import('@/pages/FlatsSelectionParams.vue'),
+      },
+      {
+        path: ':id',
+        name: 'flats.one',
+        component: () => import('@/pages/FlatsOne.vue'),
+        props: true
+      }
+    ]
+  },
       }
     ]
   },
