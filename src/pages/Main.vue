@@ -3,7 +3,7 @@
     <Header />
     <div class="slider tw-absolute tw-inset-0 -tw-z-10">
       <div
-        class="tw-bg-cover tw-opacity-0 tw-transition-opacity tw-duration-500 tw-absolute tw-inset-0"
+        class="tw-bg-cover tw-bg-center tw-opacity-0 tw-transition-opacity tw-duration-500 tw-absolute tw-inset-0"
         :style="{ 'background-image': `url(${slide.image})` }"
         :class="{ 'tw-opacity-100 tw-z-10': i === current }"
         v-for="(slide, i) in slides"
@@ -14,7 +14,7 @@
     <main class="content tw-flex tw-pb-80 landscape:tw-pb-20">
       <div class="wrapper tw-w-full tw-mt-auto">
         <div class="slides 2xl:tw-ml-[150px]">
-          <p class="tw-font-extrabold tw-text-xl sm:tw-text-xl10 2xl:tw-text-xl2 tw-leading-100">{{ slide.text }}</p>
+          <p class="tw-font-extrabold tw-text-xl sm:tw-text-xl10 2xl:tw-text-xl2 tw-leading-100" v-html="slide.text"></p>
           <div class="controls tw-space-x-4 tw-mt-26 landscape:tw-mt-4">
             <button
               class="controls__item" :class="{ 'controls__item--active': i === current }"
@@ -41,12 +41,16 @@ export default {
       current: 0,
       slides: [
         {
-          text: 'все грани жизни',
-          image: require('@/assets/images/temp/slide1.jpg'),
+          text: 'новые грани жизни',
+          image: require('@/assets/images/main/render-1.jpg'),
         },
         {
-          text: 'все грани 1',
-          image: require('@/assets/images/temp/slide2.jpg'),
+          text: 'Высотные дома в&nbsp;тихом центре',
+          image: require('@/assets/images/main/render-2.jpg'),
+        },
+        {
+          text: 'Новые грани комфорта',
+          image: require('@/assets/images/main/render-3.jpg'),
         }
       ]
     }
