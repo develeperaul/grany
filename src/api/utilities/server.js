@@ -9,6 +9,7 @@ export default class ServiceApi {
     this.handleRejectionToken = () => {};
     this.mainKy = this.createMain();
     this.swot = this.createSWOT();
+    this.map = new Map();
   }
 
   createMain() {
@@ -29,6 +30,10 @@ export default class ServiceApi {
     return this.mainKy.extend({
       hooks: {
         beforeRequest: [
+          (request, options) => {
+            if(!options?.meta?.cache) return;
+            if(this.map.has(request.url)) return this.map.get(request.url);
+          },
           (request) => {
             const accessToken = Tokens.getAccessToken();
             if (accessToken !== null) {
@@ -37,6 +42,10 @@ export default class ServiceApi {
           },
         ],
         afterResponse: [
+          (request, options, response) => {
+            if(!(response.status >= 200 && response.status < 300 && options?.meta?.cache)) return;
+            if(!this.map.has(request.url)) this.map.set(request.url, response);
+          },
           async (request, options, response) => {
             if (response.status === 401) return this.handleRejectionToken();
           },
