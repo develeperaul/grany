@@ -15,8 +15,8 @@
           <img
             width="1440"
             height="720"
-            class="tw-object-cover tw-w-full tw-h-full"
-            src="@/assets/images/about/arc.jpg"
+            class="tw-object-cover tw-object-center tw-w-full tw-h-full"
+            src="@/assets/images/main/render-2.jpg"
             loading="lazy"
             alt="Архитектура"
           >
