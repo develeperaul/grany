@@ -10,6 +10,12 @@ export default (app) => {
         text: 'Вы превысили максимальное количество попыток'
       });
 
+      if (err.response.status === 404) return vm.$notify({
+        group: 'error',
+        type: 'error',
+        text: '404 - Не удалось найти запрашиваемый ресурс'
+      });
+
       return vm.$notify({
         group: 'error',
         type: 'error',

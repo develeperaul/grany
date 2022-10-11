@@ -45,15 +45,15 @@ export default {
       soc: [
         {
           name: '#wts',
-          link: 'https://wa.me/73472242041?roistat_visit=960005'
+          link: 'https://wa.me/73472242041'
         },
         {
           name: '#tg',
-          link: 'https://wa.me/73472242041?roistat_visit=960005'
+          link: 'https://wa.me/73472242041'
         },
         {
           name: '#vk',
-          link: 'https://vk.com/agidelinvest?roistat_visit=960005'
+          link: 'https://vk.com/agidelinvest'
         }
       ]
     }

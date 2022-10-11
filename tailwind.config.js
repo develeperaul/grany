@@ -21,6 +21,7 @@ module.exports = {
       secondary: '#718A98',
       dark: '#142D3E',
       negative: '#f00',
+      positive: '#0AB81B'
     },
     lineHeight: {
       '140': '1.4',
