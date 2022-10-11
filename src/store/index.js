@@ -24,7 +24,7 @@ export default createStore({
   },
   actions: {
     async getFeedback(_c, { theme, name, cellphone }) {
-      const response = await api.swot.post('feedback', {
+      return await api.swot.post('feedback', {
         json: {
           client_id,
           client_secret,
@@ -38,13 +38,12 @@ export default createStore({
           }
         }
       }).json();
-
-      console.log(response);
     }
   },
   modules: {
     news: require('./news').default,
     flats: require('./flats').default,
+    storeys: require('./storeys').default,
     entrances: require('./entrances').default,
     loaders: require('./loaders').default,
   }

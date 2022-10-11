@@ -37,6 +37,16 @@ const routes = [
     name: 'facad.house',
     component: () => import('@/pages/FacadHouse.vue'),
   },
+
+  {
+    path: '/storeys/:id',
+    component: () => import('@/layouts/PrimaryLayout.vue'),
+    children: [
+      {
+        path: '',
+        name: 'storey',
+        component: () => import('@/pages/Storey.vue'),
+        props: true
       }
     ]
   },
