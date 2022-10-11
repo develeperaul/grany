@@ -16,12 +16,13 @@
       <button
         v-for="liter in liters"
         :key="liter.id"
-        @click="onInput(liter, field, handleChange)"
-        class="tw-w-48 tw-h-48 tw-leading-[48px] 2xl:tw-w-[64px] 2xl:tw-h-[64px] 2xl:tw-leading-[64px] tw-rounded-full tw-border tw-text-md liter"
+        class="tw-w-48 tw-h-48 tw-leading-[48px] 2xl:tw-w-[64px] 2xl:tw-h-[64px] 2xl:tw-leading-[64px] tw-rounded-full tw-border tw-text-md liter disabled:tw-bg-gray"
         :class="{
           'tw-border-gray tw-bg-white tw-text-secondary': !isActive(liter),
           'tw-border-orange tw-bg-orange tw-text-white active': isActive(liter),
          }"
+         :disabled="liter.id !== 1"
+        @click="onInput(liter, field, handleChange)"
       >
         {{ liter.label }}
       </button>

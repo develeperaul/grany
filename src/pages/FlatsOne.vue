@@ -28,8 +28,12 @@
           </p>
           <div class="md:tw-flex md:tw-flex-wrap md:tw-justify-between">
             <div class="tw-flex tw-flex-wrap -tw-ml-20 -tw-mt-10 tw-mb-30 md:tw-basis-[300px] md:tw-mr-20 xl:tw-basis-full">
-              <p class="tw-w-1/2 tw-pl-20 tw-pt-10 tw-leading-100 xl:tw-w-full xl:tw-pt-8" v-for="i in 6" :key="i">
-                Гардеробная {{ i }}
+              <p
+                class="tw-w-1/2 tw-pl-20 tw-pt-10 tw-leading-100 xl:tw-w-full xl:tw-pt-8"
+                v-for="(value, key) in $store.getters['flats/featuresHave'](flat)"
+                :key="key"
+              >
+                {{ value }}
               </p>
             </div>
             <div class="md:tw-basis-[180px] xl:tw-basis-full">

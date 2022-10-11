@@ -8,19 +8,29 @@
         {{ item.total_area }} <span>м<sup>2</sup></span>
       </p>
       <div class="tw-mb-6">
-        <p>Литер {{ item.house_name }}  •  Этаж {{item.storey_number}} •  {{ item.rooms_number }} комнаты</p>
+        <p>Литер {{ item.house_name }}  •  Этаж {{ item.storey_number }} •  {{ item.rooms_number }} комнаты</p>
       </div>
     </div>
 
-    <div class="tw-mb-20 tw-w-full xl:tw-w-1/2 2xl:tw-w-1/3">
-      <img width="686" height="428" class="tw-w-full xl:tw-w-[160px]" src="/flat.png" alt="квартира 99.5 м2">
+    <div class="tw-mb-20 tw-w-full xl:tw-w-1/2 xl:tw-pr-30 xl:tw-pl-10 2xl:tw-w-1/3">
+      <img
+        v-if="item.images"
+        class="tw-w-auto tw-h-[160px]"
+        :src="item.images[0]"
+        width="160"
+        height="160"
+        loading="lazy"
+        alt="квартира 99.5 м2">
     </div>
 
     <div class="tw-w-full tw-self-start tw-flex tw-flex-wrap -tw-mt-10 -tw-mx-8 tw-max-w-[450px] 2xl:tw-w-1/3">
-      <div class="xl:tw-w-1/3 tw-w-1/2 2xl:tw-w-1/2 tw-px-8 tw-pt-10">Гардеробная</div>
-      <div class="xl:tw-w-1/3 tw-w-1/2 2xl:tw-w-1/2 tw-px-8 tw-pt-10">2 С/У</div>
-      <div class="xl:tw-w-1/3 tw-w-1/2 2xl:tw-w-1/2 tw-px-8 tw-pt-10">Кухня-гостиная</div>
-      <div class="xl:tw-w-1/3 tw-w-1/2 2xl:tw-w-1/2 tw-px-8 tw-pt-10">Видовая квартира</div>
+      <div
+        class="xl:tw-w-1/3 tw-w-1/2 2xl:tw-w-1/2 tw-px-8 tw-pt-10"
+        v-for="(value, key) in $store.getters['flats/featuresHave'](item)"
+        :key="key"
+      >
+        {{ value }}
+      </div>
     </div>
   </router-link>
 </template>

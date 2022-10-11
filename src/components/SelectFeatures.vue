@@ -42,26 +42,32 @@ export default {
       features: [
         {
           name: 'Гардеробная',
+          value: 'has_wardrobe',
           icon: 'flat-adv-garb',
         },
         {
           name: 'Видовая квартира',
+          value: 'has_panoramic_view',
           icon: 'flat-adv-vid',
         },
         {
           name: 'Лоджия',
+          value: 'has_loggia',
           icon: 'flat-adv-balkon',
         },
         {
           name: '2 С/У',
+          value: 'has_two_bathrooms',
           icon: 'flat-adv-toilet',
         },
         {
           name: 'Мастер-спальня',
+          value: 'has_master_bedroom',
           icon: 'flat-adv-spal',
         },
         {
           name: 'Кухня-гостиная',
+          value: 'has_kitchen_united_with_lounge',
           icon: 'flat-adv-gost',
         },
       ],
