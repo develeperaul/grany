@@ -35,7 +35,7 @@
           <div class="tw-hidden lg:tw-flex tw-mr-16 2xl:tw-mr-20">
             <router-link
               class="tw-flex tw-items-center tw-bg-orange tw-rounded-l-md lg:tw-px-8 lg:hover:tw-underline lg:hover:tw-bg-orangeHover xl:tw-px-14 tw-py-10"
-              :to="{ name: 'flats.params' }"
+              :to="{ name: 'facad' }"
             >
               <svg class="tw-w-[30px] tw-h-[30px] tw-mr-10 tw-fill-white">
                 <use xlink:href="#fasad"></use>
@@ -98,7 +98,7 @@
         <div class="tw-flex">
           <router-link
             class="tw-w-1/2 tw-flex tw-items-center tw-bg-orange tw-rounded-l-md tw-px-8 tw-py-15 tw-border-r tw-border-[#DB5C00]"
-            :to="{ name: 'flats.params'  }"
+            :to="{ name: 'facad'  }"
           >
             <svg class="tw-w-[30px] tw-h-[30px] tw-mr-10 tw-fill-white">
               <use xlink:href="#fasad"></use>

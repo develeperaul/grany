@@ -25,6 +25,18 @@ const routes = [
       }
     ]
   },
+
+  {
+    path: '/facad',
+    name: 'facad',
+    component: () => import('@/pages/FlatsSelectionFacad.vue'),
+  },
+
+  {
+    path: '/facad/house',
+    name: 'facad.house',
+    component: () => import('@/pages/FacadHouse.vue'),
+  },
       }
     ]
   },
