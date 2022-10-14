@@ -14,6 +14,7 @@
           :id="name"
           v-model="value"
           v-bind="listeners"
+          :disabled="disabled"
           v-maska="type === 'tel' ? '+7 (9##) ###-##-##' : ''"
         >
         <label :for="name" class="label" :class="{ 'dirty': hasValue }">{{ label }}</label>
@@ -40,20 +41,29 @@
 <script>
 import { Field } from 'vee-validate'
 import { useField } from 'vee-validate';
-import { computed, ref } from 'vue';
+import { computed, ref, toRef, watch } from 'vue';
 
 export default {
   props: {
+    ...Field.props,
     type: {
       default: 'text',
       type: String
     },
-    ...Field.props
+    disabled: {
+      default: false,
+      type: Boolean
+    },
+    modelValue: {
+      default: '',
+    },
   },
-  setup(props) {
+  emits: ['upadte:modelValue'],
+  setup(props, { emit }) {
     const focused = ref(false);
+    const modelValue = toRef(props, 'modelValue');
     const input = useField(props.name, props.rules, {
-      initialValue: '',
+      initialValue: props.modelValue,
       label: props.label
     });
 
@@ -63,6 +73,16 @@ export default {
       onFocus: () => focused.value = true,
       onBlur: () => focused.value = false,
     }
+
+    watch(input.value, (value) => {
+      emit('upadte:modelValue', value);
+    });
+
+    watch(modelValue, (val) => {
+      if(val !== input.value.value) {
+        input.value.value = val;
+      }
+    })
 
     return {
       errorMessage: input.errorMessage,

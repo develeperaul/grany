@@ -40,9 +40,16 @@
 </template>
 <script>
 export default {
+  props: {
+    creditSum: {
+      required: true,
+      type: Number
+    }
+  },
   methods: {
     async submit({ name, cellphone }) {
-      await this.$store.dispatch('getFeedback', { name, cellphone, theme: 'Заявка на ипотеку' });
+      const theme = `Заявка на ипотеку (сумма кредита ${this.creditSum} руб)`;
+      await this.$store.dispatch('getFeedback', { name, cellphone, theme });
       this.$notify({ type: 'success', text: 'Ваша заявка успешно отправлена!' });
     }
   }

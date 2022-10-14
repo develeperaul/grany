@@ -2,19 +2,21 @@
   <app-page class="page-pb">
     <div class="wrapper">
       <h1 class="h1 tw-max-w-[340px] tw-mb-20 md:tw-max-w-full md:tw-mb-40">ИПОТЕЧНЫЙ КАЛЬКУЛЯТОР</h1>
-      <Form class="tw-mb-30 lg:tw-flex" @submit="submit">
+      <form class="tw-mb-30 lg:tw-flex" @submit="submit">
         <div class="md:tw-flex md:tw-flex-wrap md:-tw-ml-30 md:-tw-mt-10 md:tw-basis-full">
           <AppInput
             :class="[ inputClass ]"
             name="cost"
             label="Стоимость квартиры, руб"
-            rules="required"
+            rules="required|integer"
+            v-model="form.cost"
           />
           <AppInput
             :class="[ inputClass ]"
             name="start"
             label="Первоначальный взнос, руб."
-            rules="required"
+            rules="required|integer"
+            v-model="form.pay"
           >
             <template #append>
               <button type="button" class="tw-p-4" @click="showCaption">
@@ -33,26 +35,30 @@
             :class="[ inputClass ]"
             name="term"
             label="Срок кредита, лет"
-            rules="required"
+            rules="required|integer"
+            v-model="form.period"
           />
           <AppInput
             :class="[ inputClass ]"
             name="bid"
             label="Ставка, %"
-            rules="required"
+            rules="required|integer"
             type="number"
+            v-model="form.percent"
           />
           <AppInput
             :class="[ inputClass ]"
+            disabled
             name="month_cost"
             label="Ежемесячный платёж, руб"
-            rules="required"
+            v-model="monthCost"
           />
           <AppInput
             :class="[ inputClass ]"
+            disabled
             name="credit_sum"
             label="Сумма кредита, руб"
-            rules="required"
+            v-model="creditSum"
           />
         </div>
         <AppButton
@@ -60,7 +66,7 @@
         >
           Отправить заявку
         </AppButton>
-      </Form>
+      </form>
       <p class="tw-text-secondary tw-mb-40 md:tw-mb-80">{{ caption }}</p>
       <section>
         <h2 class="tw-text-lg tw-font-extrabold tw-text-secondary tw-leading-100 tw-mb-20">
@@ -78,18 +84,42 @@
       </section>
     </div>
     <teleport to="body">
-      <DialogCreditOrder v-model="showedDialog" />
+      <DialogCreditOrder
+        v-if="creditSum !== ''"
+        v-model="showedDialog"
+        v-bind="{ creditSum }"
+      />
     </teleport>
   </app-page>
 </template>
 
 <script>
 import DialogCreditOrder from '@/components/DialogCreditOrder.vue';
+import { useForm } from 'vee-validate';
+import { ref } from 'vue';
+import { debounce } from 'throttle-debounce';
 
 export default {
+  setup() {
+    const showedDialog = ref(false);
+    const { handleSubmit, meta } = useForm();
+
+    return {
+      meta,
+      showedDialog,
+      submit: handleSubmit(() => showedDialog.value = true),
+    }
+  },
   data() {
     return {
-      showedDialog: false,
+      form: {
+        cost: '',
+        pay: '',
+        period: '',
+        percent: '',
+      },
+      monthCost: '',
+      creditSum: '',
       showedCaption: false,
       inputClass: 'md:tw-w-1/3 md:tw-pl-30 md:tw-pt-10 2xl:tw-w-1/6',
       caption: 'Расчет кредита является предварительным, не является публичной офертой. Получите подробную информацию у специалиста отдела продаж.',
@@ -114,11 +144,25 @@ export default {
     }
   },
   methods: {
+    calculate(price, pay, percent, years) {
+      const i = parseFloat( percent / 100 / 12 );
+      const n = parseFloat( years * 12 );
+      this.creditSum = price - pay;
+      const r = this.creditSum * ( ( i * Math.pow( 1 + i, n ) ) / ( Math.pow( 1 + i, n ) - 1 ) );
+      this.monthCost = r.toFixed(2);
+    },
     showCaption() {
       this.showedCaption = !this.showedCaption;
     },
-    submit() {
-      this.showedDialog = true;
+  },
+  watch: {
+    form: {
+      handler: debounce(100, function () {
+        if(!this.meta.valid) return;
+        const { cost, pay, percent, period } = this.form;
+        this.calculate(+cost, +pay, +percent, +period)
+      }),
+      deep: true
     }
   },
   components: {
