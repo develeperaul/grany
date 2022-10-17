@@ -69,16 +69,30 @@
       </form>
       <p class="tw-text-secondary tw-mb-40 md:tw-mb-80">{{ caption }}</p>
       <section>
-        <h2 class="tw-text-lg tw-font-extrabold tw-text-secondary tw-leading-100 tw-mb-20">
-          банки-партнёры
-        </h2>
-        <div class="tw-flex tw-flex-wrap -tw-mt-10 -tw-ml-10">
+        <div class="tw-inline-flex tw-items-center tw-mb-30 md:tw-mb-20 tw-relative">
+          <h2 class="tw-text-lg tw-font-extrabold tw-text-secondary tw-leading-100">
+            банки-партнёры
+          </h2>
+          <button class="tw-ml-10" @click="bankPopup = !bankPopup">
+            <AppIcon
+              name="attention"
+              size="18px"
+              iconClass="tw-stroke-secondary tw-fill-secondary" />
+          </button>
           <div
-            class="tw-w-1/2 tw-pl-10 tw-pt-10 md:tw-w-auto"
+            v-if="bankPopup"
+            class="tw-absolute tw-w-full tw-leading-100 tw-top-full tw-left-0 tw-text-xs tw-text-[#C9CCCE] md:tw-top-auto md:tw-pl-20 md:tw-left-full md:tw-w-[400px]"
+          >
+            ООО «СЗ «Агидель-ИнвестСтрой» работает со всеми банками
+          </div>
+        </div>
+        <div class="tw-flex tw-flex-wrap -tw-mt-16 -tw-ml-10 md:-tw-mt-20 lg:tw-max-w-[800px] 2xl:tw-max-w-full">
+          <div
+            class="tw-w-1/2 tw-pl-10 tw-pt-16 md:tw-w-1/3 md:tw-mt-20 2xl:tw-w-auto"
             v-for="item in partners"
             :key="item.alt"
           >
-            <img width="160" height="40" v-bind="item" loading="lazy" />
+            <img class="md:tw-w-[200px]" width="160" height="40" v-bind="item" loading="lazy" />
           </div>
         </div>
       </section>
@@ -97,7 +111,7 @@
 import DialogCreditOrder from '@/components/DialogCreditOrder.vue';
 import { useForm } from 'vee-validate';
 import { ref } from 'vue';
-import { debounce } from 'throttle-debounce';
+import { throttle } from 'throttle-debounce';
 
 export default {
   setup() {
@@ -112,6 +126,7 @@ export default {
   },
   data() {
     return {
+      bankPopup: false,
       form: {
         cost: '',
         pay: '',
@@ -133,12 +148,20 @@ export default {
           src: require('@/assets/images/bank-partners/vtb.svg'),
         },
         {
-          alt: 'Абсолют банк',
-          src: require('@/assets/images/bank-partners/absolute.svg'),
+          alt: 'Альфа банк',
+          src: require('@/assets/images/bank-partners/alfa.svg'),
         },
         {
-          alt: 'Райффайзен банк',
-          src: require('@/assets/images/bank-partners/raif.svg'),
+          alt: 'Дом рф',
+          src: require('@/assets/images/bank-partners/domrf.svg'),
+        },
+        {
+          alt: 'Россельхоз банк',
+          src: require('@/assets/images/bank-partners/rossel.svg'),
+        },
+        {
+          alt: 'Газпромбанк',
+          src: require('@/assets/images/bank-partners/gazp.svg'),
         }
       ]
     }
@@ -154,16 +177,19 @@ export default {
     showCaption() {
       this.showedCaption = !this.showedCaption;
     },
+    tryCalc() {
+      if(!this.meta.valid) return;
+      const { cost, pay, percent, period } = this.form;
+      this.calculate(+cost, +pay, +percent, +period)
+    }
   },
   watch: {
     form: {
-      handler: debounce(100, function () {
-        if(!this.meta.valid) return;
-        const { cost, pay, percent, period } = this.form;
-        this.calculate(+cost, +pay, +percent, +period)
+      handler: throttle(50, function () {
+        setTimeout(() => this.tryCalc(), 0);
       }),
       deep: true
-    }
+    },
   },
   components: {
     DialogCreditOrder
