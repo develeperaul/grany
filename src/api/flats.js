@@ -11,3 +11,7 @@ export async function list(searchParams = {}) {
 export async function show(id) {
   return api.swot(`dwellings/flats/${id}`).json();
 }
+
+export async function pdf(searchParams) {
+  return api.swot('pdf', { searchParams }).text();
+}

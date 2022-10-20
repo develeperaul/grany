@@ -12,7 +12,7 @@ const features = {
 export default {
   namespaced: true,
   getters: {
-    featuresHave() {
+    featuresHas() {
       return (flat) => {
         const filtred = Object.entries(features).filter(entry => flat[entry[0]] !== 0);
         return Object.fromEntries(filtred);
@@ -27,6 +27,18 @@ export default {
     async flatsOne(_c, { id }) {
       const { data } = await FlatsAPI.show(id);
       return data;
-    }
+    },
+    async createPDF({ rootGetters, rootState }, params) {
+      return await FlatsAPI.pdf({
+        client_id: process.env.VUE_APP_CLIENT_ID,
+        client_secret: process.env.VUE_APP_CLIENT_SECRET,
+        header_tel_prefix: rootGetters.prefixhone,
+        header_tel: rootGetters.shortPhone,
+        header_site: rootState.homeSite,
+        header_logo_image: 'https://2apps.ru/img/logograni.png',
+        pdf_info_price: 'по запросу',
+        ...params
+      });
+    },
   }
 }

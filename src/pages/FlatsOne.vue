@@ -19,27 +19,41 @@
         </div>
 
         <div class="tw-mb-40 tw-min-h-[500px] -tw-mx-16 md:tw-mx-0 third xl:tw-pl-30 xl:tw-min-h-0 xl:tw-border-l xl:tw-border-dark xl:-tw-mt-30 xl:-tw-mb-40 xl:tw-py-30">
-          <iframe width="100%" height="100%" :src="flat.video_clip" />
+          <iframe width="100%" height="100%" :src="flat.video_clip" allowfullscreen />
         </div>
 
         <div class="forth">
           <p class="tw-text-lg tw-font-extrabold tw-text-secondary tw-mb-20 xl:tw-text-md xl:tw-font-normal xl:tw-mb-10 2xl:tw-font-extrabold">
             особенности
           </p>
-          <div class="md:tw-flex md:tw-flex-wrap md:tw-justify-between">
+          <div>
             <div class="tw-flex tw-flex-wrap -tw-ml-20 -tw-mt-10 tw-mb-30 md:tw-basis-[300px] md:tw-mr-20 xl:tw-basis-full">
               <p
                 class="tw-w-1/2 tw-pl-20 tw-pt-10 tw-leading-100 xl:tw-w-full xl:tw-pt-8"
-                v-for="(value, key) in $store.getters['flats/featuresHave'](flat)"
+                v-for="(value, key) in $store.getters['flats/featuresHas'](flat)"
                 :key="key"
               >
                 {{ value }}
               </p>
             </div>
-            <div class="md:tw-basis-[180px] xl:tw-basis-full">
+            <div class="tw-mb-40 md:tw-mb-30">
               <AppButton class="tw-w-full" @click="showedBook = true">
                 Заявка на бронь
               </AppButton>
+            </div>
+            <div class="tw-space-y-20 md:tw-flex md:tw-justify-center md:tw-space-x-60 md:tw-space-y-0 md:tw-mb-30 xl:tw-mb-0 xl:tw-flex-wrap xl:tw-space-x-0 xl:tw-justify-start xl:tw-space-y-8 2xl:tw-space-y-20">
+              <div>
+                <button class="control" @click="createPDF">
+                  <AppIcon class="tw-mr-20 xl:tw-hidden 2xl:tw-block" size="24px" name="pdf" fill="white"/>
+                  <span class="control__text">Скачать pdf</span>
+                </button>
+              </div>
+              <div>
+                <button class="control" v-if="hasView" @click="showView">
+                  <AppIcon class="tw-mr-20 xl:tw-hidden 2xl:tw-block" size="24px" name="flat-adv-vid" fill="white"/>
+                  <span class="control__text">Посмотреть виды из окон</span>
+                </button>
+              </div>
             </div>
           </div>
         </div>
@@ -48,15 +62,33 @@
           <DialogBook v-model:showed="showedBook" :flatNumber="flat.number" />
         </teleport>
       </section>
+
       <div v-if="$store.getters['loaders/is']('loading flat')">
         <Spinner size="100px" />
       </div>
+
+      <GDialog v-model="showedView" background="transparent" content-class="tw-h-screen tw-flex tw-items-center tw-justify-center tw-relative">
+        <template #default="{ onClose }">
+          <button
+            class="tw-absolute tw-right-30 tw-top-0"
+            @click="onClose"
+          >
+            <AppIcon name="close" size="36px" fill="white" />
+          </button>
+          <div class="tw-absolute tw-left-1/2 tw-top-1/2 -tw-translate-x-1/2 -tw-translate-y-1/2 -tw-z-10">
+            <Spinner size="100px" />
+          </div>
+          <img v-if="hasView" class="tw-w-auto tw-max-h-full" :src="flat.images[1]" alt="вид из окна" />
+        </template>
+      </GDialog>
     </div>
   </app-page>
 </template>
 
 <script>
 import DialogBook from '@/components/DialogBook.vue';
+import { GDialog } from 'gitart-vue-dialog'
+import 'gitart-vue-dialog/dist/style.css';
 
 export default {
   props: {
@@ -71,7 +103,8 @@ export default {
   data() {
     return {
       flat: null,
-      showedBook: false
+      showedBook: false,
+      showedView: false
     }
   },
   methods: {
@@ -79,19 +112,65 @@ export default {
       this.$store.dispatch('loaders/start', 'loading flat');
       this.flat = await this.$store.dispatch('flats/flatsOne', { id: this.id });
       this.$store.dispatch('loaders/end', 'loading flat');
+    },
+    showView() {
+      this.showedView = true;
+    },
+    async createPDF() {
+      const path = await this.$store.dispatch('flats/createPDF', {
+        pdf_info_rooms_count: this.flat.rooms_number,
+        pdf_info_kv_num: this.flat.number,
+        pdf_info_kv_etazh: this.flat.storey_number,
+        pdf_info_kompleks: this.flat.house_name,
+        pdf_info_kv_sq: this.flat.total_area,
+        pdf_info_image: this.flat?.images?.[0],
+      });
+
+      console.log(path);
+
+      this.downloadPDF(path);
+    },
+    downloadPDF(path) {
+      let a = document.createElement("a");
+      a.href = path;
+      a.target = '_blank';
+      a.style = "display: none";
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+    }
+  },
+  computed: {
+    hasView() {
+      if(!this.flat?.images?.[1]) return false;
+      return this.flat.images[1].indexOf('/windows_view/') !== -1;
     }
   },
   components: {
-    DialogBook
+    DialogBook,
+    GDialog
   }
 }
 </script>
-
+<style>
+  :root {
+    --g-dialog-content-shadow: none;
+  }
+</style>
 <style scoped>
+
   .content {
     display: grid;
     grid-template-columns: 100%;
     grid-template-rows: auto auto auto;
+  }
+
+  .control {
+    @apply tw-flex tw-items-center;
+  }
+
+  .control__text {
+    @apply tw-leading-100 tw-underline;
   }
 
   @screen md {
