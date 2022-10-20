@@ -1,5 +1,5 @@
 <template>
-  <section>
+  <section class="2xl:tw-pt-80">
     <p class="tw-text-md tw-text-[#4F626D] tw-leading-120 tw-mb-20 tw-max-w-[343px] md:tw-text-lg md:tw-max-w-[480px] md:tw-font-extrabold lg:tw-max-w-[940px]">
       {{ content.name }}
     </p>

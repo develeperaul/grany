@@ -1,15 +1,20 @@
 <template>
-  <footer class="tw-border-t tw-border-dark tw-py-[15px] md:tw-py-20 xl:tw-py-25">
-    <div class="wrapper">
+  <footer class="tw-border-t tw-border-dark tw-py-[13px] md:tw-py-20 xl:tw-py-25">
+    <div class="wrapper 2xl:tw-max-w-none 2xl:tw-px-40">
       <div class="tw-flex tw-flex-wrap tw-items-center">
         <a href="#" class="logo tw-block tw-mr-30 tw-mb-8 xl:tw-mb-0">
           <img class="tw-w-full" width="152" height="30" src="@/assets/images/logo2.svg" alt="логотип агидель-инвест-строй">
         </a>
-        <div class="tw-mb-20 xl:tw-mb-0 tw-basis-full xl:tw-basis-[368px] tw-text-[8px] xl:tw-text-xxs tw-leading-120 tw-mr-20">© 2003-2022, ООО СЗ «Агидель-ИнвестСтрой». Опубликованная на сайте информация носит рекламный характер и не является публичной офертой</div>
+        <div class="tw-mb-20 xl:tw-mb-0 tw-basis-full xl:tw-basis-[368px] tw-text-[8px] xl:tw-text-xxs tw-leading-100 tw-mr-20">
+          © 2003-2022, ООО СЗ «Агидель-ИнвестСтрой». Опубликованная на сайте информация носит рекламный характер и не является публичной офертой.
+          Проектная декларация на&nbsp;сайте <a class="tw-text-orange tw-underline" :href="$store.state.domrf" target="_blank">дом.рф</a>
+        </div>
 
         <div class="tw-hidden 2xl:tw-block tw-grow"></div>
 
-        <a class="tw-hidden xl:tw-block tw-text-white tw-underline tw-text-xxs tw-self-end tw-mr-20 2xl:tw-mr-[82px]" href="#">Политика конфиденциальности</a>
+        <a class="tw-hidden xl:tw-block tw-text-white tw-underline tw-text-xxs tw-self-end tw-mr-20 2xl:tw-mr-[82px]" href="/policy.pdf" download>
+          Политика конфиденциальности
+        </a>
 
         <div class="tw-flex tw-mr-8 lg:tw-mr-60 tw-space-x-8">
           <a
@@ -47,10 +52,10 @@ export default {
           name: '#wts',
           link: 'https://wa.me/73472242041'
         },
-        {
-          name: '#tg',
-          link: 'https://wa.me/73472242041'
-        },
+        // {
+        //   name: '#tg',
+        //   link: 'https://wa.me/73472242041'
+        // },
         {
           name: '#vk',
           link: 'https://vk.com/agidelinvest'

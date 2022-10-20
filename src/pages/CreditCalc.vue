@@ -42,7 +42,7 @@
             :class="[ inputClass ]"
             name="bid"
             label="Ставка, %"
-            rules="required|integer"
+            rules="required|decimal"
             type="number"
             v-model="form.percent"
           />
@@ -73,7 +73,7 @@
           <h2 class="tw-text-lg tw-font-extrabold tw-text-secondary tw-leading-100">
             банки-партнёры
           </h2>
-          <button class="tw-ml-10" @click="bankPopup = !bankPopup">
+          <button class="tw-ml-10" @mouseenter="bankPopup = true" @mouseleave="bankPopup = false">
             <AppIcon
               name="attention"
               size="18px"

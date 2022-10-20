@@ -1,6 +1,6 @@
 <template>
   <div class="layout-base tw-bg-primary tw-h-screen tw-overflow-hidden tw-relative tw-z-0 overlay">
-    <Header />
+    <Header opacityClass="tw-bg-opacity-40" />
     <div class="slider tw-absolute tw-inset-0 -tw-z-10">
       <div
         class="tw-bg-cover tw-bg-center tw-opacity-0 tw-transition-opacity tw-duration-500 tw-absolute tw-inset-0"
@@ -11,10 +11,10 @@
       ></div>
     </div>
 
-    <main class="content tw-flex tw-pb-80 landscape:tw-pb-20">
+    <main class="content tw-flex tw-pb-[8vh]">
       <div class="wrapper tw-w-full tw-mt-auto">
-        <div class="slides 2xl:tw-ml-[150px]">
-          <p class="tw-font-extrabold tw-text-xl sm:tw-text-xl10 2xl:tw-text-xl2 tw-leading-100" v-html="slide.text"></p>
+        <div class="slides">
+          <p class="tw-font-extrabold tw-text-xl md:tw-text-xl10 2xl:tw-text-xl20 tw-leading-100" v-html="slide.text"></p>
           <div class="controls tw-space-x-4 tw-mt-26 landscape:tw-mt-4">
             <button
               class="controls__item" :class="{ 'controls__item--active': i === current }"
@@ -41,12 +41,12 @@ export default {
       current: 0,
       slides: [
         {
-          text: 'новые грани жизни',
+          text: 'Новые грани жизни',
           image: require('@/assets/images/main/render-1.jpg'),
         },
         {
           text: 'Высотные дома в&nbsp;тихом центре',
-          image: require('@/assets/images/main/render-2.jpg'),
+          image: require('@/assets/images/main/render-4.jpg'),
         },
         {
           text: 'Новые грани комфорта',
@@ -94,6 +94,7 @@ export default {
 
 .slides {
   max-width: 450px;
+  @apply md:tw-max-w-[600px] 2xl:tw-max-w-[800px];
 }
 
 .controls {
@@ -127,8 +128,9 @@ export default {
 
 .overlay::after {
   content: '';
-  background: linear-gradient(180deg, rgba(0, 0, 0, 0.06) 0%, rgba(0, 0, 0, 0.6) 100%);
-  height: 360px;
+  background: linear-gradient(180deg, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0.6) 100%);
+  height: 40vh;
+  min-height: 360px;
   z-index: -1;
   @apply  tw-block tw-absolute tw-inset-x-0 tw-bottom-0;
 }

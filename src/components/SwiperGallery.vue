@@ -3,6 +3,7 @@
     class="gallery-swiper"
     loop
     lazy
+    :initialSlide="initialSlide"
     centeredSlides
     watchSlidesProgress
     :followFinger="false"
@@ -13,7 +14,7 @@
         slidesPerView: 1.5
       },
       1920: {
-        slidesPerView: 2
+        slidesPerView: 1.5
       }
     }"
     :navigation="{
@@ -55,6 +56,10 @@ export default {
     sources: {
       required: true,
       type: Array
+    },
+    initialSlide: {
+      default: 0,
+      type: Number
     }
   },
   components: {

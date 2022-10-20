@@ -76,7 +76,12 @@ export default {
         filter.storey_min = value[0];
         filter.storey_max = value[1];
       },
-      rooms: (filter, value) => {},
+      rooms: (filter, value) => {
+        if(value.length <= 0) return;
+        value.forEach((val, i) => {
+          filter[`rooms_in[${i}]`] = val;
+        });
+      },
       square: (filter, value) => {
         filter.total_area_min = value[0];
         filter.total_area_max = value[1];

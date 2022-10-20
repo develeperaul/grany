@@ -60,11 +60,11 @@ export default {
           value: 'has_two_bathrooms',
           icon: 'flat-adv-toilet',
         },
-        {
-          name: 'Мастер-спальня',
-          value: 'has_master_bedroom',
-          icon: 'flat-adv-spal',
-        },
+        // {
+        //   name: 'Мастер-спальня',
+        //   value: 'has_master_bedroom',
+        //   icon: 'flat-adv-spal',
+        // },
         {
           name: 'Кухня-гостиная',
           value: 'has_kitchen_united_with_lounge',

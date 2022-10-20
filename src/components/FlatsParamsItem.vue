@@ -8,7 +8,7 @@
         {{ item.total_area }} <span>м<sup>2</sup></span>
       </p>
       <div class="tw-mb-6">
-        <p>Литер {{ item.house_name }}  •  Этаж {{ item.storey_number }} •  {{ item.rooms_number }} комнаты</p>
+        <p>Литер {{ item.house_name }}  •  Этаж {{ item.storey_number }} •  {{ roomLabel }}</p>
       </div>
     </div>
 
@@ -26,7 +26,7 @@
     <div class="tw-w-full tw-self-start tw-flex tw-flex-wrap -tw-mt-10 -tw-mx-8 tw-max-w-[450px] 2xl:tw-w-1/3">
       <div
         class="xl:tw-w-1/3 tw-w-1/2 2xl:tw-w-1/2 tw-px-8 tw-pt-10"
-        v-for="(value, key) in $store.getters['flats/featuresHave'](item)"
+        v-for="(value, key) in $store.getters['flats/featuresHas'](item)"
         :key="key"
       >
         {{ value }}
@@ -41,6 +41,12 @@ export default {
     item: {
       required: true,
       type: Object
+    }
+  },
+  computed: {
+    roomLabel() {
+      const label = this.item.rooms_number === 1 ? 'комната': 'комнаты';
+      return `${this.item.rooms_number} ${label}`;
     }
   }
 }

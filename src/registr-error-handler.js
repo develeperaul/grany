@@ -32,4 +32,9 @@ export default (app) => {
 
     }
   }
+
+
+  window.addEventListener("error", (errMessage) => {
+    console.error("global", errMessage);
+  });
 }

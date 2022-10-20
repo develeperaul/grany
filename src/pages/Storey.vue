@@ -10,7 +10,7 @@
             Назад к фасаду
           </router-link>
           <div class="tw-hidden tw-text-xl tw-font-extrabold tw-leading-100 tw-mt-20 lg:tw-block" v-if="showedFlat">
-            №{{ showedFlat.id }}
+            №{{ showedFlat.number }}
           </div>
         </div>
         <div class="tw-overflow-y-hidden app-scroll-x tw-relative second tw-mb-30 lg:tw-mb-0 lg:tw-py-30">
@@ -20,13 +20,13 @@
           <div class="tw-flex tw-flex-wrap tw-w-[560px] tw-pb-20 -tw-ml-10 -tw-mt-10 lg:-tw-ml-[5px] lg:-tw-mt-[5px] lg:tw-w-[70px]">
             <div
               class="tw-pl-10 tw-pt-10 lg:tw-pl-[5px] lg:tw-pt-[5px]"
-              v-for="(storeyId, value) in storeys"
-              :key="storeyId"
+              v-for="storey in storeys"
+              :key="storey.id"
             >
               <ButtonStorey
-                :label="value"
-                :active="isActive(storeyId)"
-                @click="changeStorey(storeyId)"
+                :label="storey.value"
+                :active="isActive(storey.id)"
+                @click="changeStorey(storey.id)"
               />
             </div>
           </div>
@@ -87,7 +87,11 @@ export default {
 
     watch(id, load, { immediate: true });
 
-    const storeys = computed(() => entrance.value?.storeys);
+    const storeys = computed(() => {
+      if(!entrance.value?.storeys) return null;
+      const entries = Object.entries(entrance.value?.storeys).sort((a, b) => b - a);
+      return entries.map(([value, key]) => ({ id: key, value })).reverse();
+    });
 
     const imageMap = computed(() => storey.value?.image_maps?.[0]);
 
@@ -110,7 +114,7 @@ export default {
   },
   components: {
     ButtonStorey,
-    StoreyPlan
+    StoreyPlan,
   }
 }
 </script>

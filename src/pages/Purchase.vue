@@ -32,7 +32,7 @@
               </h2>
               <ul class="2xl:tw-flex 2xl:tw-flex-wrap 2xl:-tw-ml-48 -tw-mt-10">
                 <li
-                  class="tw-text-sm tw-text-white tw-flex li 2xl:tw-w-1/2 2xl:tw-pl-48 tw-pt-10"
+                  class="tw-text-sm tw-text-white tw-flex list-marker 2xl:tw-w-1/2 2xl:tw-pl-48 tw-pt-10"
                   v-for="(li, i) in content[key]"
                   :key="i"
                   :style="{ '--color': tabs[key].fill }"
@@ -190,16 +190,3 @@ export default {
   },
 };
 </script>
-
-<style scoped>
-.li::before {
-  content: '';
-  width: 14px;
-  height: 14px;
-  margin-right: 13px;
-  border: 4px solid var(--color);
-  border-radius: 4px;
-  flex-shrink: 0;
-  transform: rotate(-45deg);
-}
-</style>

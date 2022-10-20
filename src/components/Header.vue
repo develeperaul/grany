@@ -1,7 +1,7 @@
 <template>
   <header class="tw-relative tw-z-10" v-click-outside="onOutside">
-    <div class="tw-border-b tw-border-dark tw-py-[15px] lg:tw-py-25 tw-bg-primary tw-bg-opacity-70 tw-backdrop-blur-[14px]">
-      <div class="wrapper">
+    <div class="tw-border-b tw-border-dark tw-py-[15px] lg:tw-py-25 tw-bg-primary tw-backdrop-blur-[14px]" :class="[ opacityClass ]">
+      <div class="wrapper 2xl:tw-max-w-none 2xl:tw-px-40">
         <div class="tw-flex tw-items-center tw-justify-between lg:tw-justify-start">
           <router-link class="logo tw-mr-20 xl:tw-mr-48 2xl:tw-mr-[87px]" to="/">
             <img
@@ -56,10 +56,10 @@
 
           <div class="tw-hidden lg:tw-block tw-leading-120 lg:tw-mr-20 xl:tw-mr-[42px] 2xl:tw-mr-[124px]">
             <a
-              class="lg:tw-text-sm xl:tw-text-md tw-mb-2 tw-block lg:hover:tw-opacity-90"
-              href="tel:+73472586677"
+              class="lg:tw-text-sm xl:tw-text-md tw-mb-2 tw-block lg:hover:tw-opacity-90 tw-tracking-tighter"
+              :href="`tel:${$store.getters.unmaskedPhone($store.state.headerPhone)}`"
             >
-              +7 (347) 258-66-77
+              {{ $store.state.headerPhone }}
             </a>
             <AppLink
               sizeClasses="lg:tw-text-sm xl:tw-text-base"
@@ -124,6 +124,12 @@
 import { mapMutations } from 'vuex';
 
 export default {
+  props: {
+    opacityClass: {
+      default: 'tw-bg-opacity-70',
+      type: String
+    }
+  },
   data() {
     return {
       toolsValue: false

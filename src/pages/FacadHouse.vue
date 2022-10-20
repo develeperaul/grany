@@ -1,25 +1,55 @@
 <template>
-  <div class="tw-h-screen tw-overflow-hidden tw-relative tw-bg-primary">
+  <div class="tw-h-screen tw-min-h-[700px] md:tw-min-h-[1000px] lg:tw-min-h-[800px] xl:tw-min-h-[800px] tw-overflow-hidden tw-relative tw-bg-primary">
     <Header class="tw-absolute tw-inset-x-0 tw-top-0" />
-    <div class="tw-absolute tw-inset-0 tw-z-[5]">
-      <svg class="tw-w-full tw-h-full" viewBox="0 0 1920 900" preserveAspectRatio="xMidYMid slice" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <image width="100%" height="100%" :xlink:href="require('@/assets/images/house-1.jpg')" />
-        <path
-          v-for="(storey, i) in storeys"
-          :key="storey.id"
-          class="tw-opacity-0 hover:tw-opacity-50 tw-cursor-pointer"
-          fill="#FF8413"
-          d="M1137 254.736V234.581L1296.01 264.814L1619 224V246.674L1296.01 289L1137 254.736Z"
-          :style="{ transform: `translateY(${22 * i}px)` }"
-          @click="$router.push({ name: 'storey', params: { id: storey.id } })"
-        />
-      </svg>
+    <div class="tw-absolute tw-inset-0 tw-z-[5] tw-overflow-x-auto tw-pt-80 xl:tw-pt-[102px]">
+      <HousePlan
+        v-if="$grid.breakpoint === '' || $grid.breakpoint === 'sm'"
+        :storeys="storeys"
+        ratio="xMidYMid slice"
+        d="M206 192.643V177.14L315.524 200.395L538 169V186.442L315.524 219L206 192.643Z"
+        width="743"
+        height="837"
+        :offset="17"
+        :image="require('@/assets/images/house-mobile.jpg')"
+      />
+      <HousePlan
+        v-else-if="$grid.breakpoint === 'md'"
+        :storeys="storeys"
+        ratio="xMidYMid slice"
+        d="M338 246.643V231.14L474.905 254.395L753 223V240.442L474.905 273L338 246.643Z"
+        width="1000"
+        height="900"
+        :offset="21"
+        :image="require('@/assets/images/house-tablet.jpg')"
+      />
+      <HousePlan
+        v-else-if="$grid.breakpoint === 'lg'"
+        :storeys="storeys"
+        ratio="xMidYMid slice"
+        d="M626 178.225V163.651L726.617 185.512L931 156V172.395L726.617 203L626 178.225Z"
+        width="1120"
+        height="735"
+        :offset="16"
+        :image="require('@/assets/images/house-lg.jpg')"
+      />
+      <HousePlan
+        v-else
+        :storeys="storeys"
+        ratio="xMidYMid slice"
+        d="M1137 254.736V234.581L1296.01 264.814L1619 224V246.674L1296.01 289L1137 254.736Z"
+        width="1920"
+        height="900"
+        :offset="22"
+        :image="require('@/assets/images/house-1.jpg')"
+      />
     </div>
     <Footer class="tw-absolute tw-inset-x-0 tw-bottom-0 tw-z-10"/>
   </div>
 </template>
 
 <script>
+import HousePlan from '@/components/HousePlan.vue';
+
 export default {
   data() {
     return {
@@ -36,11 +66,14 @@ export default {
   },
   computed: {
     storeys() {
-      if(!this.entrance) return null;
+      if(!this.entrance) return [];
       const entries = Object.entries(this.entrance.storeys);
       const sorted = entries.sort((a, b) => b[0] - a[0]);
       return sorted.map(entry => ({ id: entry[1], number: entry[0] }))
     },
+  },
+  components: {
+    HousePlan
   }
 }
 </script>

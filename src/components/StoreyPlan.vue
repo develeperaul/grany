@@ -1,8 +1,8 @@
 <template>
   <div class="tw-bg-white tw-px-16 lg:tw-flex lg:tw-flex-col">
     <div class="tw-hidden lg:tw-block lg:tw-grow"></div>
-    <div class="tw-overflow-auto app-scroll-x app-scroll-y tw-mb-30 lg:tw-mb-0" ref="map">
-      <div class="tw-min-w-[800px] tw-min-h-[300px] md:tw-min-h-[500px] md:tw-min-w-[1000px] lg:tw-min-w-0 lg:tw-min-h-0">
+    <div class="tw-overflow-auto app-scroll-x app-scroll-y tw-mb-30 tw-relative lg:tw-mb-0 2xl:tw-px-30 2xl:tw-pb-60" ref="map">
+      <div class="tw-min-w-[800px] tw-min-h-[300px] md:tw-min-h-[500px] md:tw-min-w-[1000px] lg:tw-min-w-0 lg:tw-min-h-0 tw-text-primary">
         <svg class="tw-w-full tw-h-full" :viewBox="viewbox" xmlns="http://www.w3.org/2000/svg">
           <image :xlink:href="storeyImg" />
           <path
@@ -13,6 +13,7 @@
               'flat--free': flat.status === 'free',
               'flat--booked': flat.status === 'booked',
               'flat--sold': flat.status === 'sold',
+              'flat-hover': flatPopup?.flat?.id === flat.id
             }"
             :d="flat.polygon"
             @click="showFlat(flat.id)"
@@ -21,6 +22,11 @@
           />
         </svg>
       </div>
+      <template v-if="$grid['2xl']">
+        <div class="side side--left">ул. Султанова</div>
+        <div class="side side--right">ул. Гафури</div>
+        <div class="side side--bottom">ул. Чернышевского</div>
+      </template>
     </div>
     <div class="tw-hidden lg:tw-block lg:tw-grow"></div>
     <div class="tw-pt-10">
@@ -38,24 +44,46 @@
     </div>
 
     <teleport to="body">
-      <div v-if="flatPopup" class="flat-popup" :style="flatPopup.coords">
+      <div
+        v-if="flatPopup"
+        class="flat-popup"
+        :style="flatPopup.coords"
+        @mouseenter="showedPopup = true"
+        @mouseleave="onMouseleave"
+      >
         <div class="tw-flex">
           <p class="tw-text-xl tw-font-extrabold tw-leading-100 tw-mr-8">{{ flatPopup.flat.rooms_number }}</p>
-          <div class="tw-text-xs tw-pt-8">
-            <p>{{ flatPopup.flat.total_area }} <span>м<sup>2</sup></span></p>
+          <div class="tw-text-xs tw-leading-100 tw-pt-4">
+            <p class="tw-border-b tw-border-b-secondary tw-pb-2">{{ flatPopup.flat.living_area }} <span>м<sup>2</sup></span></p>
+            <p class="tw-pt-4">{{ flatPopup.flat.total_area }} <span>м<sup>2</sup></span></p>
           </div>
         </div>
-        <div class="tw-pt-24">
-          <p class="tw-text-right tw-text-secondary tw-leading-100">№ {{ flatPopup.flat.id }}</p>
+        <div class="tw-pt-40">
+          <p class="tw-text-right tw-text-secondary tw-leading-100">№ {{ flatPopup.flat.number }}</p>
         </div>
+        <button
+          class="tw-absolute tw-bottom-10 hover:tw-opacity-80 active:tw-opacity-70"
+          @click="showedBook = true"
+        >
+          <AppIcon name="plus" size="36px" />
+        </button>
       </div>
+
+      <DialogBook
+        v-if="flatPopup"
+        v-model:showed="showedBook"
+        :flatNumber="flatPopup.flat.number"
+        @update:showed="flatPopup = null"
+      />
     </teleport>
   </div>
 </template>
 
 <script>
+import DialogBook from '@/components/DialogBook.vue';
 import { computed, toRef, ref, watch, nextTick } from 'vue';
 import { useRouter } from 'vue-router';
+import { debounce } from 'throttle-debounce';
 
 export default {
   props: {
@@ -69,6 +97,8 @@ export default {
     const router = useRouter();
     const imageMap = toRef(props, 'imageMap');
     const flatPopup = ref(null);
+    const showedPopup = ref(null);
+    const showedBook = ref(false);
     const map = ref(null);
 
     const viewbox = computed(() => `0 0 ${imageMap.value.width} ${imageMap.value.height}`);
@@ -80,6 +110,7 @@ export default {
     }
 
     const onMouseenter = (e, flat) => {
+      showedPopup.value = true;
       const { left, top } = e.srcElement.getBoundingClientRect();
       const { pageYOffset : pageY, pageXOffset: pageX } = window;
       flatPopup.value = {
@@ -89,9 +120,15 @@ export default {
       emit('update:showed', flat);
     }
 
-    const onMouseleave = () => {
+    const hidePopup = debounce(200, () => {
+      if(showedPopup.value || showedBook.value) return;
       flatPopup.value = null;
       emit('update:showed', null);
+    });
+
+    const onMouseleave = () => {
+      showedPopup.value = false;
+      hidePopup();
     }
 
     watch(imageMap, () => {
@@ -111,8 +148,13 @@ export default {
       flatPopup,
       showFlat,
       onMouseenter,
-      onMouseleave
+      onMouseleave,
+      showedPopup,
+      showedBook
     }
+  },
+  components: {
+    DialogBook
   }
 }
 </script>
@@ -138,7 +180,7 @@ export default {
     cursor: pointer;
   }
 
-  .flat:hover {
+  .flat:hover, .flat-hover {
     opacity: 0.5;
   }
 
@@ -185,6 +227,28 @@ export default {
     .status-info::before {
       width: 14px;
       height: 14px;
+    }
+  }
+
+  @screen 2xl {
+    .side {
+      @apply tw-absolute tw-text-secondary tw-text-xs;
+    }
+
+    .side--left, .side--right {
+      @apply tw-top-1/2 -tw-translate-y-1/2 -tw-rotate-90;
+    }
+
+    .side--left {
+      @apply -tw-left-20;
+    }
+
+    .side--right {
+      @apply -tw-right-20;
+    }
+
+    .side--bottom {
+      @apply tw-bottom-0 tw-left-1/2 -tw-translate-x-1/2
     }
   }
 </style>
