@@ -7,34 +7,37 @@
         <div class="tw-flex tw-flex-wrap tw-space-x-10 tw-mb-20 md:tw-mb-30">
           <button
             class="tab"
-            :class="{ 'tab--active': curTab === tab }"
+            :class="{ 'tab--active': curTab.id === tab.id }"
             v-for="tab in tabs"
-            :key="tab"
+            :key="tab.id"
             @click="curTab = tab"
           >
-            {{ tab }}
+            {{ tab.name }}
           </button>
         </div>
 
         <div class="tw-flex tw-flex-wrap -tw-ml-10 -tw-mt-10 tw-mb-30 items app-scroll-y">
           <ProgressItem
-            v-for="i in 100" :key="i"
+            v-for="item in items" :key="item.id"
             class="tw-w-1/2 tw-pl-10 tw-pt-10 md:tw-w-1/3"
-            title="Январь 2021 г."
-            picCount="25"
-            picSrc="/gallery/g1.jpg"
-            @click="showedGallery = true"
+            v-bind="item"
+            @click="grid['2xl'] ? show2xl(item.images) : show(item.images)"
           />
         </div>
 
         <div class="2xl:tw-pb-40">
-          <AppButton class="tw-w-full md:tw-max-w-[200px]">Онлайн-трансляция</AppButton>
+          <AppButton class="tw-w-full md:tw-max-w-[200px] tw-invisible">Онлайн-трансляция</AppButton>
         </div>
 
-        <div v-if="$grid['2xl']" class="tw-relative overlay">
-          <div class="tw-flex tw-flex-wrap -tw-mx-10 -tw-mt-20 tw-overflow-x-hidden app-scroll-y">
-            <div class="tw-w-1/2 tw-px-10 tw-pt-20 tw-cursor-pointer" v-for="i in 10" :key="i" @click="showedGallery = true">
-              <img src="/gallery/g1.jpg" alt="" />
+        <div v-if="$grid['2xl']" class="tw-relative overlay tw-overflow-x-hidden app-scroll-y">
+          <div class="tw-flex tw-flex-wrap -tw-mx-10 -tw-mt-20">
+            <div
+              class="tw-w-1/2 tw-px-10 tw-pt-20 tw-cursor-pointer"
+              v-for="(image, index) in showed2xlGallery"
+              :key="image"
+              @click="show(showed2xlGallery, index)"
+            >
+              <img :src="image" alt="фото из галлереи" />
             </div>
           </div>
         </div>
@@ -44,30 +47,88 @@
     <div v-if="showedGallery" class="gallery-dialog tw-pt-[70px] tw-pb-[110px] tw-relative">
       <button
         class="tw-absolute tw-right-30 tw-top-20"
-        @click="showedGallery = false"
+        @click="showedGallery = null"
       >
         <AppIcon name="close" size="36px" fill="white" />
       </button>
-      <SwiperGallery :sources="['/gallery/g1.jpg', '/gallery/g2.jpg', '/gallery/g3.jpg', '/gallery/g4.jpg']" />
+      <SwiperGallery :sources="showedGallery" :initialSlide="selectedImage"/>
     </div>
   </app-page>
 </template>
 
 <script>
-import { ref } from '@vue/reactivity';
+import { ref, computed, watch } from 'vue';
+import { useStore } from 'vuex';
+import { useGrid } from 'vue-screen'
 import ProgressItem from '@/components/ProgressItem.vue';
 import SwiperGallery from '@/components/SwiperGallery.vue';
 
 export default {
   setup() {
-    const tabs = ref(['2019', '2020', '2021', '2022']);
-    const curTab = ref('2019');
-    const showedGallery = ref(false);
+    const store = useStore();
+    const grid = useGrid();
+    const curTab = ref(null);
+    const galleries = ref(null);
+    const gallery = ref(null);
+    const showedGallery = ref(null);
+    const showed2xlGallery = ref(null);
+    const selectedImage = ref(null);
+
+    const getGalleries = async () => {
+      store.dispatch('loaders/start', 'loading galleries');
+      galleries.value = await store.dispatch('galleries/getMixed');
+      store.dispatch('loaders/end', 'loading galleries');
+    }
+
+    const getGallery = async (id) => {
+      store.dispatch('loaders/start', 'loading gallery');
+      gallery.value = await store.dispatch('galleries/mixedOne', { id });
+      store.dispatch('loaders/end', 'loading gallery');
+    }
+
+    getGalleries();
+
+    const tabs = computed(() => {
+      if(!galleries.value) return null;
+      return galleries.value.map( ({ name, id }) => ({ name, id }) );
+    });
+
+    const items = computed(() => {
+      if(!gallery.value) return null;
+      return gallery.value.items.map(item => ({
+        id: item.id,
+        title: item.name,
+        picCount: item?.images?.length,
+        picSrc: item?.images?.[0]?.url,
+        images: item?.images?.map(image => image.url)
+      }));
+    });
+
+    const show = (images, index = 0) => {
+      selectedImage.value = index;
+      showedGallery.value = images;
+    }
+
+    const show2xl = (images) => showed2xlGallery.value = images
+
+    watch(tabs, (value) => {
+      if(value && value.length > 0) curTab.value = value[0];
+    });
+
+    watch(curTab, (value) => getGallery(value.id));
 
     return {
       tabs,
       curTab,
-      showedGallery
+      showedGallery,
+      showed2xlGallery,
+      gallery,
+      galleries,
+      items,
+      show,
+      show2xl,
+      grid,
+      selectedImage
     };
   },
   components: {
@@ -176,10 +237,11 @@ export default {
     grid-column: 2 / 3;
     padding-left: 78px;
     padding-right: 10px;
+    height: calc(100vh - 192px);
   }
 
   .grid > *:nth-child(5) > div {
-    height: calc(100vh - 192px);
+    /* height: calc(100vh - 192px); */
   }
 
   .overlay::after {
