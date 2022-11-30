@@ -1,8 +1,8 @@
 <template>
   <div class="tw-bg-white tw-px-16 lg:tw-flex lg:tw-flex-col">
     <div class="tw-hidden lg:tw-block lg:tw-grow"></div>
-    <div class="tw-overflow-auto app-scroll-x app-scroll-y tw-mb-30 tw-relative lg:tw-mb-0 2xl:tw-px-30 2xl:tw-pb-60" ref="map">
-      <div class="tw-min-w-[800px] tw-min-h-[300px] md:tw-min-h-[500px] md:tw-min-w-[1000px] lg:tw-min-w-0 lg:tw-min-h-0 tw-text-primary">
+    <div class="tw-overflow-auto app-scroll-x app-scroll-y tw-mb-30 tw-relative lg:tw-mb-0" ref="map">
+      <div class="tw-min-w-[800px] tw-min-h-[300px] md:tw-min-h-[500px] md:tw-min-w-[1000px] lg:tw-min-w-0 lg:tw-min-h-0 tw-text-primary tw-relative tw-px-30 tw-py-60">
         <svg class="tw-w-full tw-h-full" :viewBox="viewbox" xmlns="http://www.w3.org/2000/svg">
           <image :xlink:href="storeyImg" />
           <path
@@ -11,8 +11,8 @@
             class="flat"
             :class="{
               'flat--free': flat.status === 'free',
-              'flat--booked': flat.status === 'booked',
-              'flat--sold': flat.status === 'sold',
+              'flat--booked flat-hover': flat.status === 'booked',
+              'flat--sold flat-hover': flat.status === 'sold',
               'flat-hover': flatPopup?.flat?.id === flat.id
             }"
             :d="flat.polygon"
@@ -21,12 +21,13 @@
             @mouseleave="onMouseleave"
           />
         </svg>
-      </div>
-      <template v-if="$grid['2xl']">
+        <div class="side side--top">Двор</div>
         <div class="side side--left">ул. Султанова</div>
         <div class="side side--right">ул. Гафури</div>
         <div class="side side--bottom">ул. Чернышевского</div>
-      </template>
+      </div>
+      <!-- <template v-if="$grid['2xl']"> -->
+      <!-- </template> -->
     </div>
     <div class="tw-hidden lg:tw-block lg:tw-grow"></div>
     <div class="tw-pt-10">
@@ -193,7 +194,7 @@ export default {
   }
 
   .flat--sold {
-    fill: theme('colors.primary');
+    fill: theme('colors.gray');
   }
 
   .status-info {
@@ -230,7 +231,7 @@ export default {
     }
   }
 
-  @screen 2xl {
+  /* @screen 2xl { */
     .side {
       @apply tw-absolute tw-text-secondary tw-text-xs;
     }
@@ -247,8 +248,16 @@ export default {
       @apply -tw-right-20;
     }
 
-    .side--bottom {
-      @apply tw-bottom-0 tw-left-1/2 -tw-translate-x-1/2
+    .side--bottom, .side--top {
+      @apply tw-left-1/2 -tw-translate-x-1/2
     }
-  }
+
+    .side--bottom {
+      @apply tw-bottom-20;
+    }
+
+    .side--top {
+      @apply tw-top-0;
+    }
+  /* } */
 </style>

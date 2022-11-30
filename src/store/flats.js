@@ -28,14 +28,15 @@ export default {
       const { data } = await FlatsAPI.show(id);
       return data;
     },
-    async createPDF({ rootGetters, rootState }, params) {
+    async createPDF({ rootGetters }, params) {
       return await FlatsAPI.pdf({
         client_id: process.env.VUE_APP_CLIENT_ID,
         client_secret: process.env.VUE_APP_CLIENT_SECRET,
         header_tel_prefix: rootGetters.prefixhone,
         header_tel: rootGetters.shortPhone,
-        header_site: rootState.homeSite,
         header_logo_image: 'https://2apps.ru/img/logograni.png',
+        header_site: 'grani-ufa.ru',
+        header_email: 'grany-ufa@yandex.ru',
         pdf_info_price: 'по запросу',
         ...params
       });

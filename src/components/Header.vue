@@ -1,9 +1,9 @@
 <template>
   <header class="tw-relative tw-z-10" v-click-outside="onOutside">
-    <div class="tw-border-b tw-border-dark tw-py-[15px] lg:tw-py-25 tw-bg-primary tw-backdrop-blur-[14px]" :class="[ opacityClass ]">
+    <div class="tw-border-b tw-border-dark tw-py-[13px] lg:tw-py-[23px] 2xl:tw-py-[17px] tw-bg-primary tw-backdrop-blur-[14px]" :class="[ opacityClass ]">
       <div class="wrapper 2xl:tw-max-w-none 2xl:tw-px-40">
         <div class="tw-flex tw-items-center tw-justify-between lg:tw-justify-start">
-          <router-link class="logo tw-mr-20 xl:tw-mr-48 2xl:tw-mr-[87px]" to="/">
+          <router-link class="logo lg:tw-mr-16 xl:tw-mr-40 2xl:tw-mr-[87px]" to="/">
             <img
               class="tw-w-full"
               width="146"
@@ -14,7 +14,7 @@
           </router-link>
 
           <router-link
-            class="tw-hidden lg:tw-block tw-pt-4 tw-pr-4 tw-mr-24 lg:hover:tw-underline"
+            class="tw-hidden lg:tw-block tw-pt-4 tw-pr-4 lg:tw-mr-16 xl:tw-mr-24 lg:hover:tw-underline"
             :to="{ name: 'about' }"
           >
             О проекте
@@ -23,7 +23,7 @@
           <div class="tw-hidden 2xl:tw-grow 2xl:tw-block"></div>
 
           <router-link
-            class="tw-hidden lg:tw-flex lg:tw-items-center lg:tw-mr-24 lg:hover:tw-underline"
+            class="tw-hidden lg:tw-flex lg:tw-items-center lg:tw-mr-16 xl:tw-mr-24 lg:hover:tw-underline"
             :to="{ name: 'flats.params' }"
           >
             <svg class="tw-w-[36px] tw-h-[36px] lg:tw-mr-14">
@@ -56,7 +56,7 @@
 
           <div class="tw-hidden lg:tw-block tw-leading-120 lg:tw-mr-20 xl:tw-mr-[42px] 2xl:tw-mr-[124px]">
             <a
-              class="lg:tw-text-sm xl:tw-text-md tw-mb-2 tw-block lg:hover:tw-opacity-90 tw-tracking-tighter"
+              class="tw-font-[nexa-reg] lg:tw-text-sm xl:tw-text-md tw-mb-2 tw-block lg:hover:tw-opacity-90 tw-tracking-tighter"
               :href="`tel:${$store.getters.unmaskedPhone($store.state.headerPhone)}`"
             >
               {{ $store.state.headerPhone }}
@@ -167,7 +167,14 @@ export default {
 
 <style scoped>
   .logo {
-    width: 122px;
-    height: 50px;
+    width: 146px;
+    height: 54px;
+  }
+
+  @screen 2xl {
+    .logo {
+      width: 181px;
+      height: 66px;
+    }
   }
 </style>

@@ -1,6 +1,6 @@
 import Service from './server';
 
-const api = new Service('http://188.120.245.118', {
+const api = new Service('https://app-service.grani-ufa.ru', {
   apiPath: 'api/v2',
   timeout: 10000,
 });

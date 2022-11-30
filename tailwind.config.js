@@ -68,7 +68,7 @@ module.exports = {
       xxs: '10px'
     },
     fontFamily: {
-      'nexa': ['Nexa', 'sans-serif']
+      'nexa': ['Nexa', 'Arial', 'sans-serif']
     }
   },
   plugins: [],

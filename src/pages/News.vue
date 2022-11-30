@@ -67,7 +67,8 @@ export default {
   methods: {
     async getNews() {
       this.$store.dispatch('loaders/start', 'get news');
-      this.items = await this.$store.dispatch('news/getNews');
+      const items = await this.$store.dispatch('news/getNews');
+      this.items = items.reverse();
       this.$store.dispatch('loaders/end', 'get news');
     },
     async newsOne(id) {

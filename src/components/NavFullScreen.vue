@@ -25,9 +25,9 @@
               <div class="tw-w-full md:tw-w-1/2 tw-pl-30 tw-pt-20">
                 <AppLink external :to="{ name: 'news' }">Новости и акции</AppLink>
               </div>
-              <!-- <div class="tw-w-full md:tw-w-1/2 tw-pl-30 tw-pt-20">
+              <div class="tw-w-full md:tw-w-1/2 tw-pl-30 tw-pt-20">
                 <AppLink external :to="{ name: 'progress' }">Ход строительства</AppLink>
-              </div> -->
+              </div>
               <div class="tw-w-full md:tw-w-1/2 tw-pl-30 tw-pt-20">
                 <AppLink external :to="{ name: 'documents' }">Документы</AppLink>
               </div>

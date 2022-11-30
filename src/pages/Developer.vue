@@ -10,29 +10,29 @@
         </p>
         <div class="tw-space-y-20 tw-mb-30 content" v-html="content"></div>
         <div class="features">
-          <div class="tw-flex tw-flex-wrap -tw-ml-40 tw-mb-30 xl:-tw-mt-20 xl:tw-mb-[50px] 2xl:tw-mb-30">
-            <div class="tw-pl-40 tw-w-1/2 md:tw-w-auto md:tw-basis-[160px] xl:tw-pt-20">
+          <div class="tw-flex tw-flex-wrap -tw-ml-40 tw-mb-30 -tw-mt-20 xl:tw-mb-[50px] 2xl:tw-mb-30">
+            <div class="tw-pt-20 tw-pl-40 tw-w-1/2 md:tw-w-auto md:tw-basis-[150px]">
               <p class="tw-font-extrabold tw-text-lg tw-leading-100 tw-mb-10 tw-text-orange md:tw-text-xl10 xl:tw-text-xl 2xl:tw-text-xl10">19+</p>
               <p class="tw-leading-120">лет на рынке <br/> недвижимости</p>
             </div>
-            <div class="tw-pl-40 tw-w-1/2 md:tw-w-auto md:tw-basis-[160px] xl:tw-pt-20">
-              <p class="tw-font-extrabold tw-text-lg tw-leading-100 tw-mb-10 tw-text-orange md:tw-text-xl10 xl:tw-text-xl 2xl:tw-text-xl10">21</p>
+            <div class="tw-pt-20 tw-pl-40 tw-w-1/2 md:tw-w-auto md:tw-basis-[150px]">
+              <p class="tw-font-extrabold tw-text-lg tw-leading-100 tw-mb-10 tw-text-orange md:tw-text-xl10 xl:tw-text-xl 2xl:tw-text-xl10">22</p>
               <p class="tw-leading-120">реализованных <br/> домов</p>
             </div>
-            <div class="tw-pl-40 tw-w-1/2 md:tw-w-auto md:tw-basis-[160px] xl:tw-pt-20">
-              <p class="tw-font-extrabold tw-text-lg tw-leading-100 tw-mb-10 tw-text-orange md:tw-text-xl10 xl:tw-text-xl 2xl:tw-text-xl10">13</p>
+            <div class="tw-pt-20 tw-pl-40 tw-w-1/2 md:tw-w-auto md:tw-basis-[150px]">
+              <p class="tw-font-extrabold tw-text-lg tw-leading-100 tw-mb-10 tw-text-orange md:tw-text-xl10 xl:tw-text-xl 2xl:tw-text-xl10">14</p>
               <p class="tw-leading-120">домов сданы <br/> раньше срока</p>
             </div>
-            <div class="tw-pl-40 tw-w-1/2 md:tw-w-auto xl:tw-pt-20">
-              <p class="tw-font-extrabold tw-text-lg tw-leading-100 tw-mb-10 tw-text-orange md:tw-text-xl10 xl:tw-text-xl 2xl:tw-text-xl10">3 006</p>
+            <div class="tw-pt-20 tw-pl-40 tw-w-1/2 md:tw-w-auto">
+              <p class="tw-font-extrabold tw-text-lg tw-leading-100 tw-mb-10 tw-text-orange md:tw-text-xl10 xl:tw-text-xl 2xl:tw-text-xl10">3 280</p>
               <p class="tw-leading-120">квартир</p>
             </div>
           </div>
-          <div>
+          <!-- <div>
             <AppLink external native target="_blank" :to="$store.state.homeSite + '/page-o_kompanii.php'">
               О застройщике
             </AppLink>
-          </div>
+          </div> -->
         </div>
       </div>
     </div>
@@ -51,8 +51,8 @@ export default {
           с генеральным подрядчиком ООО «Уфастроймонтаж» обеспечивает высокое качество работ и применение современных материалов. Поэтому неудивительно, что каждый год спрос на наши квартиры только растет.
         </p>
         <p>
-          Основная цель компании — обеспечить население качественным жильем, поэтому мы предлагаем квартиры комфорт-класса. На сегодняшний день Специализированный застройщик «Агидель-ИнвестСтрой» предлагает квартиры в микрорайонах Дёма, Черниковка, а теперь и в историческом центре Уфы. Все объекты спроектированы с учетом последних инноваций в сфере строительства и имеют благоустроенную
-          придомовую территорию с современными детскими площадками
+          Основная цель компании - обеспечить население качественным жильем, поэтому мы предлагаем квартиры комфорт-класса. На сегодняшний день Специализированный застройщик «Агидель-ИнвестСтрой» ведет строительство и разрабатывает проекты новых жилых комплексов в микрорайонах Дёма, Черниковка, Инорс, Зелёная Роща, а теперь и в историческом центре Уфы.
+          Все объекты спроектированы с учетом последних инноваций в сфере строительства и имеют благоустроенную придомовую территорию с современными детскими площадками
         </p>
       `
     }

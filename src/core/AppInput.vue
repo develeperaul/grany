@@ -13,7 +13,7 @@
           :type="type"
           :id="name"
           v-model="value"
-          v-bind="listeners"
+          v-bind="type === 'number' ? { ...listeners, step: '0.1' } : listeners"
           :disabled="disabled"
           v-maska="type === 'tel' ? '+7 (9##) ###-##-##' : ''"
         >
@@ -24,10 +24,10 @@
       </div>
       <div v-else-if="type === 'number'" class="tw-h-[50px] tw-shrink-0 tw-pl-8 tw-flex tw-items-center">
         <button type="button" class="tw-p-2">
-          <AppIcon name="level-up" size="18px" @click="value = `${+value + 1}`" />
+          <AppIcon name="level-up" size="18px" @click="value = `${(+value + 1).toFixed(1)}`" />
         </button>
         <button type="button" class="tw-p-2 tw-rotate-180">
-          <AppIcon name="level-up" size="18px" @click="value = `${+value - 1}`" />
+          <AppIcon name="level-up" size="18px" @click="value = `${(+value - 1).toFixed(1)}`" />
         </button>
       </div>
     </div>

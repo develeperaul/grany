@@ -1,32 +1,20 @@
 @font-face {
   font-family: 'Nexa';
-  src: url('NexaRegular.eot');
-  src: local('Nexa Regular'), local('NexaRegular'),
-      url('NexaRegular.eot?#iefix') format('embedded-opentype'),
-      url('NexaRegular.woff') format('woff'),
-      url('NexaRegular.ttf') format('truetype');
+  src: local("Arial");
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'nexa-reg';
+  src: url("nexa-reg.otf");
   font-weight: normal;
   font-style: normal;
 }
 
 @font-face {
   font-family: 'Nexa';
-  src: url('Nexa-XBold.eot');
-  src: local('Nexa XBold'), local('Nexa-XBold'),
-      url('Nexa-XBold.eot?#iefix') format('embedded-opentype'),
-      url('Nexa-XBold.woff') format('woff'),
-      url('Nexa-XBold.ttf') format('truetype');
+  src: url("nexa-ru-bold.otf");
   font-weight: 800;
-  font-style: normal;
-}
-
-@font-face {
-  font-family: 'Nexa';
-  src: url('Nexa-Bold.eot');
-  src: local('Nexa Bold'), local('Nexa-Bold'),
-      url('Nexa-Bold.eot?#iefix') format('embedded-opentype'),
-      url('Nexa-Bold.woff') format('woff'),
-      url('Nexa-Bold.ttf') format('truetype');
-  font-weight: bold;
   font-style: normal;
 }

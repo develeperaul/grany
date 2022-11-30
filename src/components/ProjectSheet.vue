@@ -61,7 +61,7 @@
           <p class="project-sheet__index tw-mb-10 md:tw-mr-30 2xl:tw-mr-[100px]">03</p>
           <h2 class="project-sheet__title tw-max-w-[580px]">закрытый формат</h2>
         </div>
-        <div class="md:tw-ml-[60px] tw-max-w-[375px] 2xl:tw-max-w-[410px] 2xl:tw-ml-auto 2xl:tw-pr-20 tw-px-16 md:tw-px-0">
+        <div class="md:tw-ml-[60px] tw-max-w-[360px] 2xl:tw-max-w-[410px] 2xl:tw-ml-auto 2xl:tw-pr-20 tw-px-16 md:tw-px-0">
           <p>{{ format.text }}</p>
         </div>
 
@@ -76,12 +76,11 @@
         </div>
       </article>
       <article class="project-sheet__commerce tw-mb-20 md:tw-mb-0 2xl:tw-pt-[110px] md:tw-pl-30 2xl:tw-pl-[75px] 2xl:tw-pr-[80px] md:tw-pt-40 lg:tw-pt-0 lg:-tw-mt-[100px] 2xl:tw-mt-0">
-        <div class="tw-flex tw-flex-wrap tw-mb-20 md:tw-mb-20 2xl:tw-mb-40 tw-px-16 md:tw-px-0">
+        <div class="tw-flex tw-flex-wrap tw-mb-20 md:tw-mb-40 tw-px-16 md:tw-px-0">
           <p class="project-sheet__index tw-mb-10 md:tw-mr-30 2xl:tw-mr-[100px]">04</p>
           <h2 class="project-sheet__title">коммерция</h2>
         </div>
         <div class="md:tw-max-w-[375px] 2xl:tw-max-w-[350px] md:tw-ml-60 2xl:tw-ml-auto tw-px-16 md:tw-px-0">
-          <AppLink class="tw-mb-20" external to="#location">Офисы в центре города</AppLink>
           <p class="md:tw-mb-20 2xl:tw-mb-40 tw-max-w-[353px]">{{ commerce.text }}</p>
         </div>
       </article>
@@ -150,7 +149,9 @@
             v-for="(item, i) in eng.items"
             :key="i"
           >
-            <span class="before:tw-mb-10 list-marker tw-flex tw-flex-wrap md:before:tw-shrink-0 md:tw-flex-nowrap">{{ item }}</span>
+            <span class="before:tw-mb-10 list-marker tw-flex tw-flex-wrap md:before:tw-shrink-0 md:tw-flex-nowrap">
+              <span class="tw-basis-full md:tw-basis-auto">{{ item }}</span>
+            </span>
           </li>
         </ul>
       </article>
@@ -158,8 +159,6 @@
         <FormCallBack class="cover lg:tw-max-w-[590px] lg:tw-ml-auto 2xl:tw-max-w-[905px] 2xl:tw-mr-[-45px]" />
       </div>
     </section>
-
-
   </div>
 </template>
 
@@ -185,7 +184,7 @@ export default {
         text: 'Для автомобилей жителей комплекса предусмотрены подземный и наземный паркинги. Проектируя подземный паркинг, мы предусмотрели его функциональность и безопасность: передовые инженерные системы, спуск в паркинг на лифте, система видеонаблюдения'
       },
       flats: {
-        text: 'В ассортименте планировок комплекса от студий до 4-комнатных с высотой потолка 2,7 м. Уникальные форматы: квартиры с окнами на 3 стороны света и видовые квартиры с угловым остеклением'
+        text: 'В ассортименте планировок комплекса от студий до 4-комнатных с высотой потолка 2,7 м. Уникальные форматы: квартиры с окнами на 3 стороны света и видовые квартиры'
       },
       eng: {
         items: getEng()
@@ -204,13 +203,13 @@ function getEng() {
     'Отделка первых этажей: клинкерный кирпич',
     'Внутренние перегородки из гипсолита',
     'Звукоизоляция пола',
-    'Окна увеличенные 1,8 м в высоту из ламинированного профиля, энергоэффективные, с улучшенной шумоизоляцией',
-    'Стояки тепла, холодного и горячего водоснабжения и канализации находятся вне квартир',
+    'Окна увеличенные 1,75 м в высоту из ламинированного профиля, энергоэффективные, с улучшенной шумоизоляцией',
+    'Стояки тепла, холодного и горячего водоснабжения и электроснабжения находятся вне квартир',
     'Потолки: 2,7 метра',
     'Отделка: черновая',
-    'Разводка инженерных коммуникаций: лучевая по полу и потолку',
+    'Разводка инженерных коммуникаций: лучевая по полу',
     'Система пожаротушения и дымоудаления',
-    'Предусмотрены места для кондиционеров'
+    'Для кондиционеров предусмотрены корзины на фасаде'
   ]
 }
 </script>

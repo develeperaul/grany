@@ -26,7 +26,9 @@
         </div>
 
         <div class="2xl:tw-pb-40">
-          <AppButton class="tw-w-full md:tw-max-w-[200px] tw-invisible">Онлайн-трансляция</AppButton>
+          <a class="tw-w-full tw-block md:tw-max-w-[200px]" href="https://ucams.ufanet.ru/api/internal/embed/1667795577LVX928/?ttl=3600&autoplay=true&mute=true" target="_blank">
+            <AppButton class="tw-w-full tw-block" tag="span">Онлайн-трансляция</AppButton>
+          </a>
         </div>
 
         <div v-if="$grid['2xl']" class="tw-relative overlay tw-overflow-x-hidden app-scroll-y">

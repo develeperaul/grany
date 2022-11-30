@@ -30,6 +30,7 @@
               <h2 class="tw-text-lg tw-lowercase tw-text-secondary tw-font-extrabold tw-mb-20 2xl:tw-text-xl">
                 {{ tabs[key].label }}
               </h2>
+              <p class="tw-mb-20 2xl:tw-mb-30" v-if="key === 'tradein'">{{ tradeinTitle }}</p>
               <ul class="2xl:tw-flex 2xl:tw-flex-wrap 2xl:-tw-ml-48 -tw-mt-10">
                 <li
                   class="tw-text-sm tw-text-white tw-flex list-marker 2xl:tw-w-1/2 2xl:tw-pl-48 tw-pt-10"
@@ -87,6 +88,12 @@ export default {
           icon: 'mat',
           fill: '#FE8DEE',
           class: '2xl:tw-basis-[210px]'
+        },
+        tradein: {
+          label: 'Трейд-Ин',
+          icon: 'tradein',
+          fill: '#FFB22B',
+          class: '2xl:tw-basis-[160px]'
         },
       },
       content: {
@@ -182,7 +189,28 @@ export default {
             text: 'Ожидание ввода дома в эксплуатацию',
           },
         ],
+        tradein: [
+          {
+            text: 'Выбираете квартиру',
+          },
+          {
+            text: 'Готовите к продаже старую квартиру вместе с менеджером застройщика по trade-in (выезд, ознакомление с документами, оценка, съемка)',
+          },
+          {
+            text: 'Заключаете договор на реализацию вашей квартиры',
+          },
+          {
+            text: 'Бронируете новую квартиру по фиксированной стоимости (на срок не более 2 месяцев)',
+          },
+          {
+            text: 'Продаете старую квартиру силами наших менеджеров',
+          },
+          {
+            text: 'Оформляете сделки по продаже-покупке',
+          },
+        ],
       },
+      tradeinTitle: 'Если для покупки квартиры вам необходимо продать имеющееся жилье, вы можете воспользоваться услугой Trade-in. Сотрудники отдела продаж сделают все за вас: проведут оценку рыночной стоимости, проверят юридическую чистоту, подадут объявление о продаже вашей старой квартиры, проведут сделку. И все это бесплатно.'
     };
   },
   components: {

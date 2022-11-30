@@ -26,8 +26,8 @@
           <p class="tw-text-lg tw-font-extrabold tw-text-secondary tw-mb-20 xl:tw-text-md xl:tw-font-normal xl:tw-mb-10 2xl:tw-font-extrabold">
             особенности
           </p>
-          <div>
-            <div class="tw-flex tw-flex-wrap -tw-ml-20 -tw-mt-10 tw-mb-30 md:tw-basis-[300px] md:tw-mr-20 xl:tw-basis-full">
+          <div class="tw-relative">
+            <div class="tw-flex tw-flex-wrap -tw-ml-20 -tw-mt-10 tw-mb-30 md:tw-max-w-[300px] md:tw-mr-20 xl:tw-max-full">
               <p
                 class="tw-w-1/2 tw-pl-20 tw-pt-10 tw-leading-100 xl:tw-w-full xl:tw-pt-8"
                 v-for="(value, key) in $store.getters['flats/featuresHas'](flat)"
@@ -55,6 +55,14 @@
                 </button>
               </div>
             </div>
+            <div class="tw-flex tw-flex-wrap tw-mt-15 -tw-ml-30 md:tw-w-[300px] md:tw-absolute md:tw-top-[-30px] md:tw-right-[0] xl:tw-static xl:tw-w-auto xl:tw-top-auto xl:tw-right-auto">
+              <div class="tw-w-[94px] tw-pl-30 tw-pt-15">
+                <img width="370" height="350" src="@/assets/images/compas.png" alt="компас" />
+              </div>
+              <div v-if="hasPlace" class="tw-pl-30 tw-pt-15 tw-grow tw-basis-[192px]">
+                <img width="192" height="60" :src="images.place" alt="срез этажа" />
+              </div>
+            </div>
           </div>
         </div>
 
@@ -78,7 +86,7 @@
           <div class="tw-absolute tw-left-1/2 tw-top-1/2 -tw-translate-x-1/2 -tw-translate-y-1/2 -tw-z-10">
             <Spinner size="100px" />
           </div>
-          <img v-if="hasView" class="tw-w-auto tw-max-h-full" :src="flat.images[1]" alt="вид из окна" />
+          <img v-if="hasView" class="tw-w-auto tw-max-h-full" :src="images.view" alt="вид из окна" />
         </template>
       </GDialog>
     </div>
@@ -87,7 +95,8 @@
 
 <script>
 import DialogBook from '@/components/DialogBook.vue';
-import { GDialog } from 'gitart-vue-dialog'
+import FileSaver from 'file-saver';
+import { GDialog } from 'gitart-vue-dialog';
 import 'gitart-vue-dialog/dist/style.css';
 
 export default {
@@ -104,7 +113,7 @@ export default {
     return {
       flat: null,
       showedBook: false,
-      showedView: false
+      showedView: false,
     }
   },
   methods: {
@@ -123,27 +132,35 @@ export default {
         pdf_info_kv_etazh: this.flat.storey_number,
         pdf_info_kompleks: this.flat.house_name,
         pdf_info_kv_sq: this.flat.total_area,
-        pdf_info_image: this.flat?.images?.[0],
+        pdf_info_image: this.images.plan,
+        pdf_info_storey_plan_image: this.images.place
       });
-
-      console.log(path);
 
       this.downloadPDF(path);
     },
     downloadPDF(path) {
-      let a = document.createElement("a");
-      a.href = path;
-      a.target = '_blank';
-      a.style = "display: none";
-      document.body.appendChild(a);
-      a.click();
-      document.body.removeChild(a);
+      window.location.href = path;
     }
   },
   computed: {
+    images() {
+      const list = { plan: null, view: null, place: null };
+
+      if( !(this.flat?.images && Array.isArray(this.flat?.images)) ) return list;
+
+      this.flat.images.forEach(src => {
+        if(src.indexOf('/plans/') !== -1) list.plan = src;
+        else if(src.indexOf('/windows_view/') !== -1) list.view = src;
+        else if(src.indexOf('storey_places')) list.place = src;
+      });
+
+      return list
+    },
     hasView() {
-      if(!this.flat?.images?.[1]) return false;
-      return this.flat.images[1].indexOf('/windows_view/') !== -1;
+      return this.images.view !== null;
+    },
+    hasPlace() {
+      return this.images.place !== null;
     }
   },
   components: {

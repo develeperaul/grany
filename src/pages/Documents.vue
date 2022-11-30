@@ -6,7 +6,7 @@
         <div class="tw-text-md tw-text-secondary tw-leading-120 tw-max-w-[248px] md:tw-max-w-[600px] md:tw-font-extrabold md:tw-text-lg 2xl:tw-text-xl 2xl:tw-max-w-[862px] 2xl:tw-leading-100 2xl:tw-pt-30">
           Разрешительная документация на&nbsp;сайте
           <a class="tw-text-[#3AB2ED] tw-underline md:tw-no-underline" :href="$store.state.domrf" target="_blank">
-            нашдом.рф
+            наш.дом.рф
           </a>
         </div>
       </div>

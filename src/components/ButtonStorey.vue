@@ -29,6 +29,7 @@ export default {
   height: 30px;
   line-height: 30px;
   border-radius: 50%;
+  font-family: nexa-reg;
   @apply tw-border tw-border-gray tw-inline-block tw-text-xs tw-text-center;
 }
 

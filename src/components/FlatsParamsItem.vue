@@ -12,10 +12,10 @@
       </div>
     </div>
 
-    <div class="tw-mb-20 tw-w-full xl:tw-w-1/2 xl:tw-pr-30 xl:tw-pl-10 2xl:tw-w-1/3">
+    <div class="tw-mb-20 tw-mt-20 tw-w-full xl:tw-mt-0 xl:tw-w-1/2 xl:tw-pr-30 xl:tw-pl-10 2xl:tw-w-1/3">
       <img
         v-if="item.images"
-        class="tw-w-auto tw-h-[160px]"
+        class="tw-w-auto tw-h-[160px] tw-object-contain tw-object-top tw-mx-auto"
         :src="item.images[0]"
         width="160"
         height="160"
