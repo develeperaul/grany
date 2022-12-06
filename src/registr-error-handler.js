@@ -31,10 +31,16 @@ export default (app) => {
       });
 
     }
+
+    console.error("global", err);
   }
 
 
   window.addEventListener("error", (errMessage) => {
     console.error("global", errMessage);
   });
+
+  window.onunhandledrejection = function (e) {
+    console.error("global", e);
+  }
 }

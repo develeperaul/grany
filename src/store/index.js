@@ -8,7 +8,10 @@ export default createStore({
     contactPhone: '+7 (347) 258-66-99',
     headerPhone: '+7 (347) 258-66-99',
     domrf: 'https://xn--80az8a.xn--d1aqf.xn--p1ai/%D1%81%D0%B5%D1%80%D0%B2%D0%B8%D1%81%D1%8B/%D0%BF%D1%80%D0%BE%D0%B2%D0%B5%D1%80%D0%BA%D0%B0_%D0%BD%D0%BE%D0%B2%D0%BE%D1%81%D1%82%D1%80%D0%BE%D0%B5%D0%BA/47543',
-    homeSite: 'https://www.aisrb.ru'
+    homeSite: 'https://www.aisrb.ru',
+    address: null,
+    coords: null,
+    worktime: null
   },
   getters: {
     unmaskedPhone() {
@@ -21,8 +24,31 @@ export default createStore({
       const parts = state.headerPhone.split(' ');
       return parts[0] + ' ' + parts[1];
     },
+    address(state) {
+      return state.address
+    },
+    coords(state) {
+      return state.coords
+    },
+    worktime(state) {
+      return state.worktime
+    }
   },
   mutations: {
+    setAddress(state, payload) {
+      state.address = payload;
+    },
+    setWorktime(state, payload) {
+      state.worktime = payload;
+    },
+    setCoords(state, payload) {
+      if(typeof payload !== 'string') throw 'payload must be string';
+      let [ lat, lng ] = payload.split(', ');
+      lat = parseFloat(lat);
+      lng = parseFloat(lng);
+      if(isNaN(lat) || isNaN(lng)) throw 'lat lng must be float';
+      state.coords = [ lat, lng ];
+    },
     navToggle(state, value) {
       state.dialogCallbackShowed = false;
       if(typeof value === 'boolean') return state.navShowed = value;
@@ -50,6 +76,21 @@ export default createStore({
           }
         }
       }).json();
+    },
+    async getAddress({ commit }) {
+      const { data: { body }} = await api.swot('static_pages/1').json();
+      commit('setAddress',  body);
+      return body;
+    },
+    async getCoords({ commit }) {
+      const { data: { body }} = await api.swot('static_pages/2').json();
+      commit('setCoords',  body);
+      return body;
+    },
+    async getWorktime({ commit }) {
+      const { data: { body }} = await api.swot('static_pages/3').json();
+      commit('setWorktime',  body);
+      return body;
     }
   },
   modules: {
