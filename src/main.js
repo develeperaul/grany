@@ -3,6 +3,7 @@ import App from './App.vue'
 import router from './router'
 import store from './store'
 import '@/assets/css/app.scss';
+import 'gitart-vue-dialog/dist/style.css';
 
 const app = createApp(App);
 

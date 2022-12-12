@@ -95,9 +95,7 @@
 
 <script>
 import DialogBook from '@/components/DialogBook.vue';
-import FileSaver from 'file-saver';
 import { GDialog } from 'gitart-vue-dialog';
-import 'gitart-vue-dialog/dist/style.css';
 
 export default {
   props: {
@@ -169,11 +167,7 @@ export default {
   }
 }
 </script>
-<style>
-  :root {
-    --g-dialog-content-shadow: none;
-  }
-</style>
+
 <style scoped>
 
   .content {

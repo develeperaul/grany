@@ -28,15 +28,52 @@
     </main>
 
     <Footer />
+
+    <GDialog v-model="showedBanners" background="transparent" content-class="tw-h-screen tw-flex tw-items-center tw-justify-center tw-relative">
+        <template #default="{ onClose }">
+          <button
+            class="tw-absolute tw-right-30 tw-top-0"
+            @click="onClose"
+          >
+            <AppIcon name="close" size="36px" fill="white" />
+          </button>
+          <div class="tw-absolute tw-left-1/2 tw-top-1/2 -tw-translate-x-1/2 -tw-translate-y-1/2 -tw-z-10">
+            <Spinner size="100px" />
+          </div>
+          <img
+            v-if="hasBanners && isMobileBanner"
+            class="tw-w-auto tw-max-h-full"
+            :src="banners[1].url"
+            alt="баннер"
+            @click="showCallback"
+          />
+          <img
+            v-else-if="hasBanners"
+            class="tw-w-auto tw-max-h-full tw-cursor-pointer"
+            :src="banners[0].url"
+            alt="баннер"
+            @click="showCallback"
+          />
+        </template>
+      </GDialog>
   </div>
 </template>
 <script>
+import { GDialog } from 'gitart-vue-dialog';
+import { mapGetters, mapActions } from 'vuex';
+
 export default {
+  async created() {
+    if(!this.hasBanners) await this.getBanners();
+    if(this.hasBanners) this.showedBanners = true;
+  },
   mounted() {
     this.start();
   },
+  components: { GDialog },
   data() {
     return {
+      showedBanners: false,
       interval: null,
       current: 0,
       slides: [
@@ -56,6 +93,11 @@ export default {
     }
   },
   methods: {
+    ...mapActions(['getBanners']),
+    showCallback() {
+      this.$store.commit('callbackToggle', true);
+      this.showedBanners = false;
+    },
     onClick(i) {
       this.current = i;
       this.reset();
@@ -75,6 +117,14 @@ export default {
     }
   },
   computed: {
+    ...mapGetters(['banners']),
+    hasBanners() {
+      return this.banners.length >= 2;
+    },
+    isMobileBanner() {
+      const bp = ['', 'sm', 'md']
+      return bp.includes(this.$grid.breakpoint);
+    },
     slide() {
       return this.slides[this.current];
     },
@@ -83,7 +133,7 @@ export default {
         'background-image': `url(${this.slide.image})`,
       }
     }
-  }
+  },
 }
 </script>
 <style scoped lang="scss">

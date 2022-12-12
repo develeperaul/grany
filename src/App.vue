@@ -15,6 +15,24 @@ import DialogCallback from '@/components/DialogCallback.vue';
 import CookieAccept from '@/components/CookieAccept.vue';
 
 export default {
+  async created() {
+    try {
+      if(process.env.NODE_ENV === 'production') {
+        await this.appendMetric();
+      }
+    } catch(e) {
+      console.error(e);
+    }
+  },
+  methods: {
+    async appendMetric() {
+      const data = await this.$store.dispatch('getMetric');
+      const script = document.createElement('script');
+      script.type = 'text/javascript';
+      script.innerHTML = data;
+      document.head.appendChild(script);
+    }
+  },
   components: {
     NavFullScreen,
     CookieAccept,

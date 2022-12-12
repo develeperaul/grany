@@ -11,7 +11,8 @@ export default createStore({
     homeSite: 'https://www.aisrb.ru',
     address: null,
     coords: null,
-    worktime: null
+    worktime: null,
+    banners: []
   },
   getters: {
     unmaskedPhone() {
@@ -32,7 +33,10 @@ export default createStore({
     },
     worktime(state) {
       return state.worktime
-    }
+    },
+    banners(state) {
+      return state.banners
+    },
   },
   mutations: {
     setAddress(state, payload) {
@@ -40,6 +44,9 @@ export default createStore({
     },
     setWorktime(state, payload) {
       state.worktime = payload;
+    },
+    setBanners(state, payload) {
+      state.banners = payload;
     },
     setCoords(state, payload) {
       if(typeof payload !== 'string') throw 'payload must be string';
@@ -90,6 +97,17 @@ export default createStore({
     async getWorktime({ commit }) {
       const { data: { body }} = await api.swot('static_pages/3').json();
       commit('setWorktime',  body);
+      return body;
+    },
+    async getBanners({ commit }) {
+      const { data } = await api.swot('documents').json();
+      const docNames = ['banner-desktop', 'banner-mobile'];
+      const list = Array.isArray(data) ? data : [];
+      const banners = list.filter(doc => docNames.includes(doc.title));
+      commit('setBanners', banners);
+    },
+    async getMetric() {
+      const { data: { body }} = await api.swot('static_pages/5').json();
       return body;
     }
   },
