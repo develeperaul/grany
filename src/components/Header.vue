@@ -83,7 +83,7 @@
 
           <button class="lg:tw-hidden" @click="toolsToggle">
             <svg class="tw-w-[36px] tw-h-[36px] lg:tw-mr-14">
-              <use :xlink:href="toolsValue ? '#b-cross' : '#b-key'"></use>
+              <use :xlink:href="toolsValue ? '#b-cross' : '/sprite.svg#b-plan'"></use>
             </svg>
           </button>
         </div>

@@ -60,6 +60,10 @@ export default {
           to: { name: 'location' },
         },
         {
+          label: 'выбрать планировку',
+          to: { name: 'flats.params' },
+        },
+        {
           label: 'галерея',
           to: { name: 'gallery' },
         },
