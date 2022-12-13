@@ -12,7 +12,8 @@ export default createStore({
     address: null,
     coords: null,
     worktime: null,
-    banners: []
+    banners: [],
+    bannerWasShown: false
   },
   getters: {
     unmaskedPhone() {
@@ -37,8 +38,15 @@ export default createStore({
     banners(state) {
       return state.banners
     },
+    bannerWasShown(state) {
+      return state.bannerWasShown
+    },
   },
   mutations: {
+    setBannerWasShown(state, payload) {
+      if(typeof payload !== 'boolean') throw new Error('payload must be boolean');
+      state.bannerWasShown = payload;
+    },
     setAddress(state, payload) {
       state.address = payload;
     },

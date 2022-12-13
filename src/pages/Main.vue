@@ -65,7 +65,10 @@ import { mapGetters, mapActions } from 'vuex';
 export default {
   async created() {
     if(!this.hasBanners) await this.getBanners();
-    if(this.hasBanners) this.showedBanners = true;
+    if(this.hasBanners && !this.bannerWasShown) {
+      this.showedBanners = true;
+      this.$store.commit('setBannerWasShown', true);
+    }
   },
   mounted() {
     this.start();
@@ -117,7 +120,7 @@ export default {
     }
   },
   computed: {
-    ...mapGetters(['banners']),
+    ...mapGetters(['banners', 'bannerWasShown']),
     hasBanners() {
       return this.banners.length >= 2;
     },
