@@ -30,7 +30,7 @@ export default {
       const script = document.createElement('script');
       script.type = 'text/javascript';
       script.innerHTML = data;
-      document.head.appendChild(script);
+      document.head.append(script);
     }
   },
   components: {

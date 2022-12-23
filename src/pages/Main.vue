@@ -40,20 +40,22 @@
           <div class="tw-absolute tw-left-1/2 tw-top-1/2 -tw-translate-x-1/2 -tw-translate-y-1/2 -tw-z-10">
             <Spinner size="100px" />
           </div>
-          <img
-            v-if="hasBanners && isMobileBanner"
-            class="tw-w-auto tw-max-h-full"
-            :src="banners[1].url"
-            alt="баннер"
-            @click="showCallback"
-          />
-          <img
-            v-else-if="hasBanners"
-            class="tw-w-auto tw-max-h-full tw-cursor-pointer"
-            :src="banners[0].url"
-            alt="баннер"
-            @click="showCallback"
-          />
+          <template v-for="banner in banners">
+            <img
+              v-if="isMobileBanner && banner.title === 'banner-mobile'"
+              class="tw-w-auto tw-max-h-full"
+              :src="banner.url"
+              alt="баннер"
+              @click="showCallback"
+            />
+            <img
+              v-else-if="!isMobileBanner && banner.title === 'banner-desktop'"
+              class="tw-w-auto tw-max-h-full tw-cursor-pointer"
+              :src="banner.url"
+              alt="баннер"
+              @click="showCallback"
+            />
+          </template>
         </template>
       </GDialog>
   </div>
