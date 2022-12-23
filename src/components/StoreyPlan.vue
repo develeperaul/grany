@@ -16,7 +16,7 @@
               'flat-hover': flatPopup?.flat?.id === flat.id
             }"
             :d="flat.polygon"
-            @click="showFlat(flat.id)"
+            @click="showFlat(flat.id, flat.status)"
             @mouseenter="onMouseenter($event, flat)"
             @mouseleave="onMouseleave"
           />
@@ -106,7 +106,8 @@ export default {
     const storeyImg = computed(() => imageMap.value.path);
     const flatsMap = computed(() => imageMap.value.flats);
 
-    const showFlat = (flatId) => {
+    const showFlat = (flatId, flatStatus) => {
+      if(flatStatus === 'sold') return;
       router.push({ name: 'flats.one', params: { id: flatId } })
     }
 
@@ -194,7 +195,8 @@ export default {
   }
 
   .flat--sold {
-    fill: theme('colors.gray');
+    fill: theme('colors.primary');
+    cursor: auto !important;
   }
 
   .status-info {
