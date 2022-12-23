@@ -32,7 +32,7 @@
     <div class="tw-hidden lg:tw-block lg:tw-grow"></div>
     <div class="tw-pt-10">
       <ul class="tw-flex tw-flex-wrap tw-justify-center -tw-mt-10 -tw-ml-30">
-        <li class="status-info before:tw-bg-primary">
+        <li class="status-info before:tw-bg-[#081903a1]">
           <span>квартира продана</span>
         </li>
         <li class="status-info before:tw-bg-orange">
