@@ -95,7 +95,6 @@ export default {
     onLeave(storeyId) {
       if(this.timer) clearTimeout(this.timer);
       this.timer = setTimeout(() => {
-        console.log(storeyId, this.activeStorey);
         if(storeyId === this.activeStorey?.id) {
           this.activeStorey = null;
         }
