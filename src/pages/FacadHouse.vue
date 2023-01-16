@@ -92,10 +92,13 @@ export default {
         this.activeStorey = await this.$store.dispatch('storeys/storeysOne', { id: storeyId });
       }
     },
-    onLeave() {
+    onLeave(storeyId) {
       if(this.timer) clearTimeout(this.timer);
       this.timer = setTimeout(() => {
-        this.activeStorey = null;
+        console.log(storeyId, this.activeStorey);
+        if(storeyId === this.activeStorey?.id) {
+          this.activeStorey = null;
+        }
       }, 500);
     }
   },
