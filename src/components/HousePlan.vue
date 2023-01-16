@@ -15,6 +15,8 @@
       :d="d"
       :style="{ transform: `translateY(${offset * i}px)` }"
       @click="$router.push({ name: 'storey', params: { id: storey.id } })"
+      @mouseenter="$emit('enter', storey.id)"
+      @mouseleave="$emit('leave', storey.id)"
     />
   </svg>
 </template>
@@ -50,7 +52,8 @@ export default {
       required: true,
       type: String
     }
-  }
+  },
+  emits: ['enter', 'leave']
 }
 </script>
 
