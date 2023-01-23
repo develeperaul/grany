@@ -2,7 +2,7 @@
   <div class="tw-h-screen tw-min-h-[700px] md:tw-min-h-[1000px] lg:tw-min-h-[800px] xl:tw-min-h-[800px] tw-overflow-hidden tw-relative tw-bg-primary">
     <Header class="tw-absolute tw-inset-x-0 tw-top-0" />
     <div class="tw-absolute tw-inset-0 tw-z-[5] tw-overflow-x-auto tw-pt-80 xl:tw-pt-[102px]">
-      <div class="storey-popup" v-if="activeStorey && ['lg', 'xl', '2xl'].includes($grid.breakpoint)">
+      <div class="storey-popup" v-if="activeStorey">
         <div>
           <p class="tw-text-xl tw-text-orange tw-font-extrabold">
             {{ activeStorey.number }}
@@ -18,6 +18,8 @@
       </div>
       <HousePlan
         v-if="$grid.breakpoint === '' || $grid.breakpoint === 'sm'"
+        tappable
+        :activeStorey="hoverStorey"
         :storeys="storeys"
         ratio="xMidYMid slice"
         d="M206 192.643V177.14L315.524 200.395L538 169V186.442L315.524 219L206 192.643Z"
@@ -29,6 +31,8 @@
       />
       <HousePlan
         v-else-if="$grid.breakpoint === 'md'"
+        tappable
+        :activeStorey="hoverStorey"
         :storeys="storeys"
         ratio="xMidYMid slice"
         d="M290 183.481V166.116L442.74 192.163L753 157V176.535L442.74 213L290 183.481Z"
@@ -40,6 +44,7 @@
       />
       <HousePlan
         v-else-if="$grid.breakpoint === 'lg'"
+        :activeStorey="hoverStorey"
         :storeys="storeys"
         ratio="xMidYMid slice"
         d="M626 178.225V163.651L726.617 185.512L931 156V172.395L726.617 203L626 178.225Z"
@@ -51,6 +56,7 @@
       />
       <HousePlan
         v-else
+        :activeStorey="hoverStorey"
         :storeys="storeys"
         ratio="xMidYMid slice"
         d="M1137 254.736V234.581L1296.01 264.814L1619 224V246.674L1296.01 289L1137 254.736Z"
@@ -75,6 +81,7 @@ export default {
       entrance: null,
       storeysMap: new Map(),
       activeStorey: null,
+      hoverStorey: null,
       timer: null
     }
   },
@@ -86,10 +93,13 @@ export default {
       this.entrance = await this.$store.dispatch('entrances/entrancesOne', { id: 1 });
     },
     async onEnter(storeyId) {
+      this.hoverStorey = { id: storeyId };
+
       if(this.storeysMap.has(storeyId)) {
         this.activeStorey = this.storeysMap.get(storeyId);
       } else {
         this.activeStorey = await this.$store.dispatch('storeys/storeysOne', { id: storeyId });
+        this.storeysMap.set(storeyId, this.activeStorey);
       }
     },
     onLeave(storeyId) {
@@ -97,6 +107,7 @@ export default {
       this.timer = setTimeout(() => {
         if(storeyId === this.activeStorey?.id) {
           this.activeStorey = null;
+          this.hoverStorey = null;
         }
       }, 500);
     }
@@ -126,7 +137,14 @@ export default {
   position: absolute;
   top: 50%;
   transform: translateY(-50%);
-  left: 25px;
+  right: 16px;
+}
+
+@screen lg {
+  .storey-popup {
+    right: auto;
+    left: 25px;
+  }
 }
 
 @screen 2xl {

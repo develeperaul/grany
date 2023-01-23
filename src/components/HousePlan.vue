@@ -10,13 +10,14 @@
     <path
       v-for="(storey, i) in storeys"
       :key="storey.id"
-      class="tw-opacity-0 hover:tw-opacity-50 tw-cursor-pointer"
+      class="tw-opacity-0 tw-cursor-pointer"
+      :class="[ activeStorey?.id === storey.id ? 'tw-opacity-50' : 'tw-opacity-0' ]"
       fill="#FF8413"
       :d="d"
       :style="{ transform: `translateY(${offset * i}px)` }"
-      @click="$router.push({ name: 'storey', params: { id: storey.id } })"
-      @mouseenter="$emit('enter', storey.id)"
-      @mouseleave="$emit('leave', storey.id)"
+      @click="onClick(storey)"
+      @mouseenter="!tappable ? $emit('enter', storey.id) : null"
+      @mouseleave="!tappable ? $emit('leave', storey.id) : null"
     />
   </svg>
 </template>
@@ -51,9 +52,24 @@ export default {
     width: {
       required: true,
       type: String
+    },
+    tappable: {
+      default: false,
+      type: Boolean
+    },
+    activeStorey: {
+      default: undefined
     }
   },
-  emits: ['enter', 'leave']
+  emits: ['enter', 'leave'],
+  methods: {
+    onClick(storey) {
+      if(this.tappable && this.activeStorey?.id !== storey.id) {
+        return this.$emit('enter', storey.id)
+      }
+      this.$router.push({ name: 'storey', params: { id: storey.id } })
+    }
+  }
 }
 </script>
 
