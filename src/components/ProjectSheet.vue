@@ -241,7 +241,7 @@ function getEng() {
     background-position-y: 230px;
     background-position-x: -627px;
     background-size: 1580px;
-    background-image: url(@/assets/images/3d-gora.png);
+    
     background-repeat: no-repeat;
     background-color: theme('colors.primary');
     background-blend-mode: difference;

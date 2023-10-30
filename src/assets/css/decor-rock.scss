@@ -1,18 +1,5 @@
 @screen md {
-  .decor-rock::after {
-    content: '';
-    width: 1030px;
-    height: 1030px;
-    position: absolute;
-    z-index: -1;
-    top: -145px;
-    right: -392px;
-    background-image: url(@/assets/images/3d-gora.png);
-    background-repeat: no-repeat;
-    background-blend-mode: difference;
-    background-size: cover;
-    @apply tw-bg-primary;
-  }
+  
 }
 
 @screen xl {

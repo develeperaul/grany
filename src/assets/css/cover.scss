@@ -3,20 +3,7 @@
     overflow: hidden;
   }
 
-  .cover::before {
-    content: "";
-    width: 260px;
-    height: 260px;
-    z-index: 0;
-    background-image: url(@/assets/images/cfera.png);
-    background-repeat: no-repeat;
-    mix-blend-mode: luminosity;
-    background-size: cover;
-    transform: rotate(90deg);
-    position: absolute;
-    top: -88px;
-    right: -56px;
-  }
+  
 
   @screen lg {
     .cover::before {

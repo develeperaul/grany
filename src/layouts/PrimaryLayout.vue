@@ -21,7 +21,7 @@ export default {
 @screen 2xl {
   .decor-cropped {
     background: theme('colors.primary');
-    background-image: url(@/assets/images/3d-gora-cropped.png);
+    
     background-repeat: no-repeat;
     background-blend-mode: difference;
     background-size: 75%;
