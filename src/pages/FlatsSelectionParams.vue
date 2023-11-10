@@ -98,7 +98,7 @@ export default {
       for(let key in filter.value) {
         if(filter.value[key]) filterGetters[key](newFilter, filter.value[key]);
       }
-      return newFilter;
+      return { status: "free", ...newFilter };
     };
 
     const getFlats = async () => {
