@@ -12,7 +12,7 @@
               <a class="tw-block" :href="`tel:${$store.getters.unmaskedPhone($store.state.contactPhone)}`">
                 {{ $store.state.contactPhone }}
               </a>
-              <a class="tw-block" href="mailto:grany-ufa@yandex.ru">
+              <a class="tw-block" href="mailto:grani-ufa@yandex.ru">
                 grani-ufa@yandex.ru
               </a>
             </div>
