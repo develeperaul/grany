@@ -4,13 +4,13 @@
     >
     <div
       class="tw-border-b tw-border-[#D7D7D7] tw-py-[13px] lg:tw-py-[23px] 2xl:tw-py-[17px]  tw-flex tw-justify-center">
-      <router-link class="" to="/">
+      <a class="" href="https://chernikadom.ru">
         <img
           width="146"
           height="60"
           src="@/assets/images/logo.svg"
           alt="логотип грани" />
-      </router-link>
+      </a>
     </div>
     <router-view />
     <Footer />
